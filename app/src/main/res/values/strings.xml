@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">SAMST</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="gender_prompt"> Select Gender </string>
+    <string-array name="Language">
+        <item>Marathi</item>
+        <item>Hindi</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="Blood_Group">
+        <item>A+</item><item>B+</item>
+        <item>AB+</item><item>A-</item>
+        <item>B-</item><item>AB-</item>
+        <item>O+</item><item>O-</item>
+    </string-array>
+</resources>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/eventImage"
+            android:src="@drawable/logo"
+            android:layout_margin="5dp"
+            android:paddingHorizontal="5dp"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:id="@+id/eventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/eventImage"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+
+            android:textStyle="bold"
+            android:layout_marginBottom="3dp"
+            android:padding="3dp"
+            android:text="Vishwamagalya sabha"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/eventDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventName"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_toRightOf="@+id/eventImage"
+
+            android:layout_marginBottom="3dp"
+            android:padding="3dp"
+            android:text="check out Vishwamagalya sabha vidio"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/Btn"
+            android:text="Previous"
+            android:layout_alignParentRight="true"
+            android:textAllCaps="false"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bgcard"
+             android:textColor="@color/black"
+             android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:padding="3dp"
+            />
+        <TextView
+            android:id="@+id/eventLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_marginTop="3dp"
+            android:text="https://www.youtube.com/watch?v=3VIzc_uhUCQ"
+            android:layout_below="@+id/eventDesc"
+            android:layout_marginStart="5dp"
+            android:textSize="12sp"
+            android:layout_toRightOf="@+id/eventImage"
+
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
