@@ -79,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             int textColor = Color.parseColor("#FDFDFD");
-            actionBar.setTitle("Form");
+            actionBar.setTitle("Formed");
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "Dashboard" + "</font>"));
         }
