@@ -99,6 +99,7 @@ public class SacWorldActivity extends AppCompatActivity {
         String rationCard = binding.rationCard.getText().toString().trim();
         String annualFamilyIncome2 = binding.annualFamilyIncome2.getText().toString().trim();
         String  pincode2= binding.pincode2.getText().toString().trim();
+        String  pincode3= binding.pincode2.getText().toString().trim();
 
         if (TextUtils.isEmpty(annualFamilyIncome2)) {
             binding.annualFamilyIncome2.setError("Income is required.");
