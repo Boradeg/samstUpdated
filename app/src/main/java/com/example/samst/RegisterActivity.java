@@ -66,7 +66,10 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(new Intent(RegisterActivity.this, SignInScreen.class));
                 // Handle Logout click
                 return true;
-
+            } else if (itemId == R.id.menu_Home) {
+                startActivity(new Intent(RegisterActivity.this, DashboardScreen.class));
+                // Handle Logout click
+                return true;
             } else {
                 return false;
             }

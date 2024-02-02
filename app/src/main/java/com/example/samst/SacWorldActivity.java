@@ -24,8 +24,11 @@ import com.example.samst.databinding.ActivityRegisterBinding;
 import com.example.samst.databinding.ActivitySacWorldBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class SacWorldActivity extends AppCompatActivity {
@@ -76,7 +79,11 @@ public class SacWorldActivity extends AppCompatActivity {
 
 
     }
-
+    private boolean isValidName(String name) {
+        // Customize this method based on your definition of a valid name
+        // For example, you can use a regular expression to check for the presence of numbers
+        return !name.matches(".*\\d.*");
+    }
     private boolean validateFields() {
         String firstNameFamilyHead2 = binding.firstNameFamilyHead2.getText().toString().trim();
         String surnameFamilyHead2 = binding.surnameFamilyHead2.getText().toString().trim();
@@ -98,159 +105,235 @@ public class SacWorldActivity extends AppCompatActivity {
         String rationCardNumber2 = binding.rationCardNumber2.getText().toString().trim();
         String rationCard = binding.rationCard.getText().toString().trim();
         String annualFamilyIncome2 = binding.annualFamilyIncome2.getText().toString().trim();
-        String  pincode2= binding.pincode2.getText().toString().trim();
+        String pincode2 = binding.pincode2.getText().toString().trim();
+        String adharNumberPattern = "^[2-9]{1}[0-9]{11}$";
+        String voterIdPattern = "^[a-zA-Z]{3}[0-9]{7}$";
+        String rationCardNumberPattern = "^[a-zA-Z0-9]+$";
 
-        String  pincode4= binding.pincode2.getText().toString().trim();
+        String pincodePattern = "^[1-9][0-9]{5}$";
 
-        String  pincode3= binding.pincode2.getText().toString().trim();
+        String mobileNumberPattern = "^[6-9][0-9]{9}$";
+        String emailPattern = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$";
+        Map<View, String> errorMap = new HashMap<>();
+        // Validate Aadhar Number
+        if (TextUtils.isEmpty(adharNumber2)) {
+            errorMap.put(binding.adharNumber2, "Aadhar Number is required.");
+        } else if (!adharNumber2.matches(adharNumberPattern)) {
+            errorMap.put(binding.adharNumber2, "Invalid Aadhar Number.");
+        } else {
+            binding.adharNumber2.setError(null); // Clear error
+        }
+        // Validate Pincode
+        if (TextUtils.isEmpty(pincode2)) {
+            errorMap.put(binding.pincode2, "Pincode is required.");
+        } else if (!pincode2.matches(pincodePattern)) {
+            errorMap.put(binding.pincode2, "Invalid Pincode.");
+        } else {
+            binding.pincode2.setError(null); // Clear error
+        }
 
-
+        // Validate Income
         if (TextUtils.isEmpty(annualFamilyIncome2)) {
-            binding.annualFamilyIncome2.setError("Income is required.");
-            return false;
+            errorMap.put(binding.annualFamilyIncome2, "Income is required.");
+        } else {
+            try {
+                double incomeValue = Double.parseDouble(annualFamilyIncome2);
+                if (incomeValue <= 0) {
+                    errorMap.put(binding.annualFamilyIncome2, "Income should be greater than 0.");
+                } else {
+                    binding.annualFamilyIncome2.setError(null); // Clear error
+                }
+            } catch (NumberFormatException e) {
+                errorMap.put(binding.annualFamilyIncome2, "Invalid Income value.");
+            }
+        }
+
+        // Validate Voter ID
+        if (TextUtils.isEmpty(voterId2)) {
+            errorMap.put(binding.voterId2, "Voter ID is required.");
+        } else if (!voterId2.matches(voterIdPattern)) {
+            errorMap.put(binding.voterId2, "Invalid Voter ID.");
+        } else {
+            binding.voterId2.setError(null); // Clear error
+        }
+
+        // Validate Ration Card Number
+        if (TextUtils.isEmpty(rationCardNumber2)) {
+            errorMap.put(binding.rationCardNumber2, "Ration Card Number is required.");
+        } else if (!rationCardNumber2.matches(rationCardNumberPattern)) {
+            errorMap.put(binding.rationCardNumber2, "Invalid Ration Card Number.");
+        } else {
+            binding.rationCardNumber2.setError(null); // Clear error
+        }
+
+        // Validate Mobile Number
+        if (TextUtils.isEmpty(number2)) {
+            errorMap.put(binding.number2, "Mobile Number is required.");
+        } else if (!number2.matches(mobileNumberPattern)) {
+            errorMap.put(binding.number2, "Invalid Mobile Number.");
+        } else {
+            binding.number2.setError(null); // Clear error
+        }
+
+        // Validate Email
+        if (TextUtils.isEmpty(email2)) {
+            errorMap.put(binding.email2, "Email is required.");
+        } else if (!email2.matches(emailPattern)) {
+            errorMap.put(binding.email2, "Invalid Email Address.");
+        } else {
+            binding.email2.setError(null); // Clear error
+        }
+
+        //Map<TextInputLayout, String> errorMap = new HashMap<>();
+        if (TextUtils.isEmpty(annualFamilyIncome2)) {
+            errorMap.put(binding.annualFamilyIncome2, "Income is required.");
         } else {
             binding.annualFamilyIncome2.setError(null); // Clear error
         }
+
         if (TextUtils.isEmpty(firstNameFamilyHead2)) {
-            binding.firstNameFamilyHead2.setError("Name is required.");
-            return false;
+            errorMap.put(binding.firstNameFamilyHead2, "Name is required.");
+        } else if (!isValidName(firstNameFamilyHead2)) {
+            errorMap.put(binding.firstNameFamilyHead2, "Name should not contain numbers.");
         } else {
             binding.firstNameFamilyHead2.setError(null); // Clear error
         }
 
+
         if (TextUtils.isEmpty(surnameFamilyHead2)) {
-            binding.surnameFamilyHead2.setError("Surname is required.");
-            return false;
+            errorMap.put(binding.surnameFamilyHead2, "Surname is required.");
+        } else if (!isValidName(surnameFamilyHead2)) {
+            errorMap.put(binding.surnameFamilyHead2, "Surname should not contain numbers.");
         } else {
             binding.surnameFamilyHead2.setError(null); // Clear error
         }
-
         if (TextUtils.isEmpty(parentName2)) {
-            binding.parentName2.setError("Parent Name is required.");
-            return false;
+            errorMap.put(binding.parentName2, "Parent Name is required.");
+        } else if (!isValidName(parentName2)) {
+            errorMap.put(binding.parentName2, "Parent Name should not contain numbers.");
         } else {
             binding.parentName2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(dateOfBirth2)) {
-            binding.dateOfBirth2.setError("Date of Birth is required.");
-            return false;
+            errorMap.put(binding.dateOfBirth2, "Date of Birth is required.");
         } else {
             binding.dateOfBirth2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(gender2)) {
-            binding.gender2.setError("Gender is required.");
-            return false;
+            errorMap.put(binding.gender2, "Gender is required.");
         } else {
             binding.gender2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(bloodGroup2)) {
-            binding.bloodGroup2.setError("Blood Group is required.");
-            return false;
+            errorMap.put(binding.bloodGroup2, "Blood Group is required.");
         } else {
             binding.bloodGroup2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(address2)) {
-            binding.address2.setError("Address is required.");
-            return false;
+            errorMap.put(binding.address2, "Address is required.");
         } else {
             binding.address2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(country2)) {
-            binding.country2.setError("Country is required.");
-            return false;
+            errorMap.put(binding.country2, "Country is required.");
         } else {
             binding.country2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(state2)) {
-            binding.state2.setError("State is required.");
-            return false;
+            errorMap.put(binding.state2, "State is required.");
         } else {
             binding.state2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(city2)) {
-            binding.city2.setError("City is required.");
-            return false;
+            errorMap.put(binding.city2, "City is required.");
         } else {
             binding.city2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(village2)) {
-            binding.village2.setError("Village is required.");
-            return false;
+            errorMap.put(binding.village2, "Village is required.");
         } else {
             binding.village2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(serviceDetails)) {
-            binding.serviceDetails.setError("Service Details are required.");
-            return false;
+            errorMap.put(binding.serviceDetails, "Service Details are required.");
         } else {
             binding.serviceDetails.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(designation2)) {
-            binding.designation2.setError("Designation is required.");
-            return false;
+            errorMap.put(binding.designation2, "Designation is required.");
         } else {
             binding.designation2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(email2)) {
-            binding.email2.setError("Email is required.");
-            return false;
+            errorMap.put(binding.email2, "Email is required.");
         } else {
             binding.email2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(number2)) {
-            binding.number2.setError("Number is required.");
-            return false;
+            errorMap.put(binding.number2, "Number is required.");
         } else {
             binding.number2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(adharNumber2)) {
-            binding.adharNumber2.setError("Aadhar Number is required.");
-            return false;
+            errorMap.put(binding.adharNumber2, "Aadhar Number is required.");
         } else {
             binding.adharNumber2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(voterId2)) {
-            binding.voterId2.setError("Voter ID is required.");
-            return false;
+            errorMap.put(binding.voterId2, "Voter ID is required.");
         } else {
             binding.voterId2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(rationCard)) {
-            binding.rationCard.setError("Ration Card is required.");
-            return false;
+            errorMap.put(binding.rationCard, "Ration Card is required.");
         } else {
             binding.rationCard.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(rationCardNumber2)) {
-            binding.rationCardNumber2.setError("Ration Card Number is required.");
-            return false;
+            errorMap.put(binding.rationCardNumber2, "Ration Card Number is required.");
         } else {
             binding.rationCardNumber2.setError(null); // Clear error
         }
 
-        // Add additional validation rules as needed
+        // Validate Pincode
+        if (TextUtils.isEmpty(pincode2)) {
+            errorMap.put(binding.pincode2, "Pincode is required.");
+        } else {
+            binding.pincode2.setError(null); // Clear error
+        }
 
-        return true;
+// Show errors for all empty fields
+        for (Map.Entry<View, String> entry : errorMap.entrySet()) {
+            setErrorForView(entry.getKey(), entry.getValue());
+        }
+        // If there are errors, return false; otherwise, return true
+        return errorMap.isEmpty();
     }
-
-    private boolean isValidPin(String enteredPin) {
-        return !TextUtils.isEmpty(enteredPin) && TextUtils.isDigitsOnly(enteredPin) && enteredPin.length() == 6;
+    private void setErrorForView(View view, String errorMessage) {
+        if (view instanceof TextInputLayout) {
+            ((TextInputLayout) view).setError(errorMessage);
+        } else if (view instanceof TextInputEditText) {
+            ((TextInputEditText) view).setError(errorMessage);
+        } else {
+            // Handle other types of views if needed
+            // For non-text input views, consider providing a more suitable way to display errors
+        }
     }
 
     private void showToast(String message) {
@@ -307,7 +390,10 @@ public class SacWorldActivity extends AppCompatActivity {
                 startActivity(new Intent(SacWorldActivity.this, RegisterActivity.class));
                 // Handle Registration click
                 return true;
-
+            } else if (itemId == R.id.menu_Home) {
+                startActivity(new Intent(SacWorldActivity.this, DashboardScreen.class));
+                // Handle Logout click
+                return true;
             } else if (itemId == R.id.menu_logout) {
                 startActivity(new Intent(SacWorldActivity.this, SignInScreen.class));
                 // Handle Logout click

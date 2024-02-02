@@ -141,8 +141,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 android:layout_marginHorizontal="16dp"
                 >
@@ -179,8 +179,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 android:layout_marginHorizontal="16dp"
                 >
@@ -197,8 +197,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 android:layout_marginHorizontal="16dp"
                 >
@@ -215,8 +215,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 android:layout_marginHorizontal="16dp"
                 >
@@ -234,8 +234,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -246,7 +246,7 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Village*"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/pincode"
@@ -254,8 +254,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -266,7 +266,7 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Pincode*"
-                    android:inputType="numberPassword" />
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -275,8 +275,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 android:layout_marginHorizontal="16dp"
                 >
@@ -294,8 +294,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -315,8 +315,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -335,8 +335,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -347,7 +347,7 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Mobile Number*"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/annualFamilyIncome"
@@ -355,8 +355,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -367,7 +367,7 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Annual Family Income*"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/adharNumber"
@@ -375,8 +375,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -387,7 +387,7 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Adhar Number*"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/voterId"
@@ -395,8 +395,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -407,14 +407,14 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Voter Id*"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 android:layout_marginHorizontal="16dp"
                 >
@@ -432,8 +432,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/Red"
-                app:hintTextColor="@color/Red"
+                app:boxStrokeColor="@color/black"
+                app:hintTextColor="@color/purple_500"
                 app:layout_constraintHorizontal_bias="0.5"
                 >
                 <com.google.android.material.textfield.TextInputEditText
@@ -444,7 +444,7 @@
                     android:cursorVisible="true"
                     android:layout_height="wrap_content"
                     android:hint="Ration Card No*"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton

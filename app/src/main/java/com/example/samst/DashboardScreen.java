@@ -65,8 +65,13 @@ public class DashboardScreen extends AppCompatActivity {
                 startActivity(new Intent(DashboardScreen.this, RegisterActivity.class));
                 // Handle Registration click
                 return true;
+            } else if (itemId == R.id.menu_Home) {
+                startActivity(new Intent(DashboardScreen.this, DashboardScreen.class));
+                // Handle Logout click
+                return true;
 
-            } else if (itemId == R.id.menu_logout) {
+
+        } else if (itemId == R.id.menu_logout) {
                 startActivity(new Intent(DashboardScreen.this, SignInScreen.class));
                 // Handle Logout click
                 return true;
