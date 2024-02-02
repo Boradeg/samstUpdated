@@ -9,21 +9,41 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DashboardScreen extends AppCompatActivity {
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+//
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
+import com.bumptech.glide.Glide;
+
+public class DashboardScreen extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private EventAdapter adapter;
+    private int currentEventId = 9;
     private DrawerLayout drawerLayout;
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -32,13 +52,58 @@ public class DashboardScreen extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard_screen);
         addDrawerLayoutAndMenu();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         setDrawable();
-        List<EventData> doctorDataList = getEventData();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        DoctorAdapter doctorAdapter = new DoctorAdapter(doctorDataList);
-        recyclerView.setAdapter(doctorAdapter);
+        recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new EventAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        fetchData();
+    }
+    private void fetchData() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://sidhman.in/skmarati/new/admin/admin-api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+
+        fetchEventData(apiService);
+    }
+
+    private void fetchEventData(ApiService apiService) {
+        Call<EventResponse> call = apiService.getEventDetails(currentEventId);
+
+        call.enqueue(new Callback<EventResponse>() {
+            @Override
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
+                if (response.isSuccessful()) {
+                    EventResponse eventResponse = response.body();
+                    if (eventResponse != null) {
+                        updateRecyclerView(eventResponse);
+                        currentEventId++;
+                        fetchEventData(apiService);
+                    }
+                } else {
+                    // Handle error, show a message, etc.
+                    System.out.println("Error: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EventResponse> call, Throwable t) {
+                // Handle failure, show a message, etc.
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void updateRecyclerView(EventResponse eventResponse) {
+        List<EventResponse> updatedList = new ArrayList<>(adapter.getEvents());
+        updatedList.add(eventResponse);
+        adapter.updateEvents(updatedList);
+
+
     }
 
     private void addDrawerLayoutAndMenu() {
@@ -96,29 +161,6 @@ public class DashboardScreen extends AppCompatActivity {
     }
 
 
-    private List<EventData> getEventData() {
-        // Replace this with your logic to fetch doctor data
-        // Sample data for demonstration
-        return List.of(
-               new EventData("Melava-6 (part 1)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 2)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 3)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 4)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 5)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 6)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 7)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 1)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 1)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 1)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 2)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 3)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 4)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 5)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 6)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 1)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous"),
-                new EventData("Melava-6 (part 2)", "https://www.youtube.com/watch?v=VL_ccRojUTI", "Previous")
-        );
-    }
 
     private void setDrawable() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -146,46 +188,8 @@ public class DashboardScreen extends AppCompatActivity {
     }
 }
 
-class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> {
 
-    private final List<EventData> doctorList;
 
-    public DoctorAdapter(List<EventData> doctorList) {
-        this.doctorList = doctorList;
-    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView doctorNameTextView;
-        TextView dateTextView;
-        TextView usernameTextView;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            doctorNameTextView = itemView.findViewById(R.id.eventName);
-            dateTextView = itemView.findViewById(R.id.eventLink);
-            usernameTextView = itemView.findViewById(R.id.Btn);
-        }
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_rv, parent, false);
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        EventData currentDoctor = doctorList.get(position);
-        holder.doctorNameTextView.setText(currentDoctor.getEventName());
-        holder.dateTextView.setText(currentDoctor.getEventlink());
-        holder.usernameTextView.setText(currentDoctor.getMode());
-    }
-
-    @Override
-    public int getItemCount() {
-        return doctorList.size();
-    }
-}
 

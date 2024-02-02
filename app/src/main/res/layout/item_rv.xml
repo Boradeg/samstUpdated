@@ -6,80 +6,92 @@
     android:layout_height="wrap_content"
     android:layout_margin="7dp"
     app:cardCornerRadius="7dp"
+    app:cardBackgroundColor="#E6E3EC"
     app:cardElevation="16dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
        >
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/eventImage"
-            android:src="@drawable/logo"
-            android:layout_margin="5dp"
-            android:paddingHorizontal="5dp"
-            android:layout_centerVertical="true"
-            />
-        <TextView
-            android:id="@+id/eventName"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:id="@+id/image_layout"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingHorizontal="5dp"
+                android:src="@drawable/logo" />
+
+        </RelativeLayout>
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/eventImage"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/Btn_type"
+            android:layout_toRightOf="@+id/image_layout"
+            >
+
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
 
             android:textStyle="bold"
             android:layout_marginBottom="3dp"
-            android:padding="3dp"
+
             android:text="Vishwamagalya sabha"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/eventDesc"
+            android:id="@+id/descriptionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/eventName"
+            android:layout_below="@+id/titleTextView"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
-            android:layout_toRightOf="@+id/eventImage"
-
             android:layout_marginBottom="3dp"
-            android:padding="3dp"
             android:text="check out Vishwamagalya sabha vidio"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/eventLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="https://www.youtube.com/"
+            android:layout_below="@+id/descriptionTextView"
+            android:layout_marginStart="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
+            />
+        </RelativeLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/Btn"
+            android:id="@+id/Btn_type"
             android:text="Previous"
             android:layout_alignParentRight="true"
             android:textAllCaps="false"
             android:layout_marginEnd="10dp"
             android:layout_marginTop="10dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bgcard"
-             android:textColor="@color/black"
-             android:layout_alignParentTop="true"
+            android:layout_height="30dp"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/white"
+            android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:padding="3dp"
             />
-        <TextView
-            android:id="@+id/eventLink"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:layout_marginTop="3dp"
-            android:text="https://www.youtube.com/watch?v=3VIzc_uhUCQ"
-            android:layout_below="@+id/eventDesc"
-            android:layout_marginStart="5dp"
-            android:textSize="12sp"
-            android:layout_toRightOf="@+id/eventImage"
-
-            android:textColor="@color/black"
-            android:layout_marginBottom="5dp"
-            />
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

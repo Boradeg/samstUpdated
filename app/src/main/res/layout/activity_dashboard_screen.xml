@@ -76,7 +76,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             tools:ignore="NotSibling"
-            tools:listitem="@layout/item_rv" />
+            tools:listitem="@layout/item_rv2" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

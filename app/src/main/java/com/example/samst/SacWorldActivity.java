@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.example.samst.databinding.ActivitySacWorldBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.hbb20.CountryCodePicker;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -42,13 +45,30 @@ public class SacWorldActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         addDrawerLayoutAndMenu();
         String[] languages = getResources().getStringArray(R.array.Language);
-        String[] blood_group = getResources().getStringArray(R.array.Blood_Group);
+       // String[] blood_group = getResources().getStringArray(R.array.Blood_Group);
         String[] gender = getResources().getStringArray(R.array.Gender);
         ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, languages);
-        ArrayAdapter<String> arrayAdapter_blood_group = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,blood_group);
+        ArrayAdapter<String> arrayAdapter_blood_group = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,languages);
         ArrayAdapter<String> arrayAdapter_gender = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,gender);
-        binding.gender2.setAdapter(arrayAdapter_gender);
-        binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
+        binding.serviceDetail2.setAdapter(arrayAdapter_gender);
+       binding.city2.setAdapter(arrayAdapter_gender);
+       binding.rationCard2.setAdapter(arrayAdapter_gender);
+       binding.city2.setAdapter(arrayAdapter_gender);
+       binding.country2.setAdapter(arrayAdapter_gender);
+       binding.gender2.setAdapter(arrayAdapter_gender);
+       binding.bloodGroup2.setAdapter(arrayAdapter_gender);
+       binding.state2.setAdapter(arrayAdapter_gender);
+//        CountryCodePicker countryCodePicker = findViewById(R.id.countryPicker);
+//
+//        countryCodePicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+//            @Override
+//            public void onCountrySelected() {
+//                String selectedCountryCode = countryCodePicker.getSelectedCountryCode();
+//                String selectedCountryName = countryCodePicker.getSelectedCountryName();
+//                // Handle the selected country code and name
+//            }
+//        });
+       // binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,23 +81,53 @@ public class SacWorldActivity extends AppCompatActivity {
             }
         });
 
-        TextInputEditText dateOfBirthEditText = findViewById(R.id.dateOfBirth2);
-        dateOfBirthEditText.setOnTouchListener((v, event) -> {
-            // Check if the touch event is on the right drawable
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                int drawableRight = 2; // Index of the right drawable
-                Rect bounds = dateOfBirthEditText.getCompoundDrawables()[drawableRight].getBounds();
+        //AutoCompleteTextView dateOfBirthEditText = findViewById(R.id.dateOfBirth2);
+//        binding.dateOfBirth2.setOnTouchListener((v, event) -> {
+//            // Check if the touch event is on the right drawable
+//            if (event.getAction() == MotionEvent.ACTION_UP) {
+//                int drawableRight = 2; // Index of the right drawable
+//                Rect bounds = binding.getCompoundDrawables()[drawableRight].getBounds();
+//
+//                // Check if the touch event is within the bounds of the right drawable
+//                if (event.getRawX() >= (v.getRight() - bounds.width())) {
+//                    showDatePicker();
+//                    return true; // Consume the touch event
+//                }
+//            }
+//            return false; // Allow other touch events to be handled
+//        });
+        // Find the AutoCompleteTextView for Date of Birth
+        final AutoCompleteTextView dateOfBirthTextView = findViewById(R.id.dateOfBirth2);
 
-                // Check if the touch event is within the bounds of the right drawable
-                if (event.getRawX() >= (v.getRight() - bounds.width())) {
-                    showDatePicker();
-                    return true; // Consume the touch event
-                }
+        // Set a click listener on the AutoCompleteTextView to open DatePickerDialog
+        dateOfBirthTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog(dateOfBirthTextView);
             }
-            return false; // Allow other touch events to be handled
         });
 
 
+    }
+
+    private void showDatePickerDialog(final AutoCompleteTextView autoCompleteTextView) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        String formattedDate = String.format("%02d/%02d/%04d", day, month + 1, year);
+                        autoCompleteTextView.setText(formattedDate);
+                    }
+                },
+                year, month, day);
+
+        datePickerDialog.show();
     }
     private boolean isValidName(String name) {
         // Customize this method based on your definition of a valid name
@@ -96,14 +146,14 @@ public class SacWorldActivity extends AppCompatActivity {
         String state2 = binding.state2.getText().toString().trim();
         String city2 = binding.city2.getText().toString().trim();
         String village2 = binding.village2.getText().toString().trim();
-        String serviceDetails = binding.serviceDetails.getText().toString().trim();
+        String serviceDetails = binding.serviceDetail2.getText().toString().trim();
         String designation2 = binding.designation2.getText().toString().trim();
         String email2 = binding.email2.getText().toString().trim();
         String number2 = binding.number2.getText().toString().trim();
         String adharNumber2 = binding.adharNumber2.getText().toString().trim();
         String voterId2 = binding.voterId2.getText().toString().trim();
         String rationCardNumber2 = binding.rationCardNumber2.getText().toString().trim();
-        String rationCard = binding.rationCard.getText().toString().trim();
+        String rationCard = binding.rationCard2.getText().toString().trim();
         String annualFamilyIncome2 = binding.annualFamilyIncome2.getText().toString().trim();
         String pincode2 = binding.pincode2.getText().toString().trim();
         String adharNumberPattern = "^[2-9]{1}[0-9]{11}$";
@@ -264,9 +314,9 @@ public class SacWorldActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(serviceDetails)) {
-            errorMap.put(binding.serviceDetails, "Service Details are required.");
+            errorMap.put(binding.serviceDetail2, "Service Details are required.");
         } else {
-            binding.serviceDetails.setError(null); // Clear error
+            binding.serviceDetail2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(designation2)) {
@@ -300,9 +350,9 @@ public class SacWorldActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(rationCard)) {
-            errorMap.put(binding.rationCard, "Ration Card is required.");
+            errorMap.put(binding.rationCard2, "Ration Card is required.");
         } else {
-            binding.rationCard.setError(null); // Clear error
+            binding.rationCard2.setError(null); // Clear error
         }
 
         if (TextUtils.isEmpty(rationCardNumber2)) {
@@ -363,7 +413,7 @@ public class SacWorldActivity extends AppCompatActivity {
     }
 
     private void updateDateOfBirth(String selectedDate) {
-        TextInputEditText dateOfBirthEditText = findViewById(R.id.dateOfBirth2);
+        AutoCompleteTextView dateOfBirthEditText = findViewById(R.id.dateOfBirth2);
         dateOfBirthEditText.setText(selectedDate);
     }
     private void addDrawerLayoutAndMenu() {

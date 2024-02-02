@@ -35,125 +35,213 @@
                 android:layout_margin="20dp"
                 android:padding="10dp"
                 android:src="@drawable/add_profile" />
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputOuterFieldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/purple_500"
-        app:layout_constraintHorizontal_bias="0.5"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/firstNameFamilyHead2"
-            style="@style/LoginTextInputInnerFieldStyle"
-            android:layout_width="match_parent"
-            android:textCursorDrawable="@null"
-            android:cursorVisible="true"
-
-            android:layout_height="wrap_content"
-            android:hint="Name Of Family Head*"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputOuterFieldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/purple_500"
-        app:layout_constraintHorizontal_bias="0.5"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/surnameFamilyHead2"
-            style="@style/LoginTextInputInnerFieldStyle"
-            android:layout_width="match_parent"
-            android:textCursorDrawable="@null"
-            android:cursorVisible="true"
-            android:layout_height="wrap_content"
-            android:hint="Surname"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputOuterFieldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/purple_500"
-        app:layout_constraintHorizontal_bias="0.5"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/parentName2"
-            style="@style/LoginTextInputInnerFieldStyle"
-            android:layout_width="match_parent"
-            android:textCursorDrawable="@null"
-            android:cursorVisible="true"
-            android:layout_height="wrap_content"
-            android:hint="Parent/Guardian Name*"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/LoginTextInputOuterFieldStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        app:boxStrokeColor="@color/black"
-        app:hintTextColor="@color/purple_500"
-        app:layout_constraintHorizontal_bias="0.5"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dateOfBirth2"
-            style="@style/LoginTextInputInnerFieldStyle"
-            android:layout_width="match_parent"
-
-            android:textCursorDrawable="@null"
-            android:cursorVisible="true"
-            android:drawableRight="@drawable/baseline_arrow_drop_down_24"
-            android:layout_height="wrap_content"
-            android:hint="Date Of Birth*"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
+                android:orientation="horizontal"
                 android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/gender2"
-                    android:layout_width="match_parent"
+               >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
 
-                    android:hint="Gender*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstNameFamilyHead2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Name Of Family Head*"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/surnameFamilyHead2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Surname"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
+                android:orientation="horizontal"
                 android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/bloodGroup2"
-                    android:layout_width="match_parent"
+
+            >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Blood Group*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+
+                    >
+
+                    <AutoCompleteTextView
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:id="@+id/dateOfBirth2"
+                        android:layout_width="match_parent"
+                        android:cursorVisible="true"
+                        tools:ignore="DuplicateIds"
+
+                        android:layout_marginEnd="4dp"
+                        android:layout_height="wrap_content"
+                        android:hint="Date Of Birth*"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <AutoCompleteTextView
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:id="@+id/gender2"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:layout_marginStart="4dp"
+                        android:cursorVisible="true"
+                        android:drawableRight="@drawable/baseline_arrow_drop_down_24"
+                        android:layout_height="wrap_content"
+                        android:hint="Gender*"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <AutoCompleteTextView
+                       android:id="@+id/blood_group2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:hint="Blood Group*"
+                        android:inputType="none"
+                        tools:ignore="DuplicateIds" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/parentName2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Parent/Guardian Name*"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="16dp"
+
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/country2"
+                        android:layout_width="match_parent"
+                        android:inputType="none"
+                        android:layout_marginEnd="4dp"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_height="wrap_content"
+                        android:hint="Country*"
+
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/state2"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:layout_marginStart="4dp"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="State*"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
           <com.google.android.material.textfield.TextInputLayout
 
         style="@style/LoginTextInputOuterFieldStyle"
@@ -172,280 +260,316 @@
             android:cursorVisible="true"
             android:layout_height="wrap_content"
             android:hint="Residence Address*"
-            android:inputType="textEmailAddress" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp">
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/country2"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Country*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/state"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/state2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="State*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/city"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/city2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="City*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/village"
-                style="@style/LoginTextInputOuterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/village2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
-                    android:layout_height="wrap_content"
-                    android:hint="Village*"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/pincode"
-                style="@style/LoginTextInputOuterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5">
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/pincode2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
-                    android:layout_height="wrap_content"
-                    android:hint="Pincode*"
-                    android:inputType="number" />
+                    <AutoCompleteTextView
+                        android:id="@+id/city2"
+                        android:layout_width="match_parent"
+                        style="@style/LoginTextInputInnerFieldStyle"
 
-            </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_height="wrap_content"
+                        android:hint="City*"
+                        android:inputType="none"
+                      />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/village2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Village*"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="16dp"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Email*"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/number2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Number"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/serviceDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Service/Buisness Detail*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/designation"
-                style="@style/LoginTextInputOuterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/designation2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
-                    android:layout_height="wrap_content"
-                    android:hint="Designation*"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email"
-                style="@style/LoginTextInputOuterFieldStyle"
+
+
+
+
+
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Email*"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/number"
-                style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/rationCard2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ration Card*"
+                        android:inputType="none"
+                        tools:ignore="DuplicateIds" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/rationCardNumber2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Ration Card Number*"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
                 >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/number2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Mobile Number*"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/annualFamilyIncome"
-                style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/adharNumber2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Adhar Number*"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/voterId2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="VoterId Number*"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
                 >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/annualFamilyIncome2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Annual Family Income*"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/adharNumber"
-                style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/pincode2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Pincode*"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/annualFamilyIncome2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+                        android:layout_height="wrap_content"
+                        android:hint="Family Income*"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/adharNumber2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginHorizontal="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Adhar Number*"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/voterId"
-                style="@style/LoginTextInputOuterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/voterId2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/service_detail2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Service Detail*"
+                        android:inputType="none"
+                        tools:ignore="DuplicateIds" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/LoginTextInputOuterFieldStyle"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="Voter Id*"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginHorizontal="16dp"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/rationCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ration Card*"
-                    android:inputType="none"
-                    />
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/rationCardNumber"
-                style="@style/LoginTextInputOuterFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                app:boxStrokeColor="@color/black"
-                app:hintTextColor="@color/purple_500"
-                app:layout_constraintHorizontal_bias="0.5"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/rationCardNumber2"
-                    style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:textCursorDrawable="@null"
-                    android:cursorVisible="true"
-                    android:layout_height="wrap_content"
-                    android:hint="Ration Card No*"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    app:boxStrokeColor="@color/black"
+                    app:hintTextColor="@color/purple_500">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/designation2"
+                        style="@style/LoginTextInputInnerFieldStyle"
+                        android:layout_width="match_parent"
+                        android:textCursorDrawable="@null"
+                        android:cursorVisible="true"
+
+                        android:layout_height="wrap_content"
+                        android:hint="Designation*"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
@@ -457,10 +581,12 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/gredient2"
-
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
         </LinearLayout>
+
+
+
     </ScrollView>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
