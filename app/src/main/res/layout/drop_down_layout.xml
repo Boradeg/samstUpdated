@@ -2,9 +2,9 @@
     android:id="@+id/text"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="50dp"
     android:text="Hey"
     android:textColor="@color/black"
-    android:textSize="17dp"
-    android:padding="14dp"
+    android:textSize="14dp"
+    android:padding="10dp"
     />

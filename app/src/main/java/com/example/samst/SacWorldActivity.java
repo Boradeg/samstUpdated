@@ -44,31 +44,22 @@ public class SacWorldActivity extends AppCompatActivity {
         binding = ActivitySacWorldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         addDrawerLayoutAndMenu();
-        String[] languages = getResources().getStringArray(R.array.Language);
-       // String[] blood_group = getResources().getStringArray(R.array.Blood_Group);
+
+        String[] service_buisness = getResources().getStringArray(R.array.Service_buisness_detail);
+        ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,service_buisness);
         String[] gender = getResources().getStringArray(R.array.Gender);
-        ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, languages);
-        ArrayAdapter<String> arrayAdapter_blood_group = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,languages);
         ArrayAdapter<String> arrayAdapter_gender = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,gender);
-        binding.serviceDetail2.setAdapter(arrayAdapter_gender);
+        String[] ration_card = getResources().getStringArray(R.array.Ration_card);
+        ArrayAdapter<String> arrayAdapter_ration_card = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,ration_card);
+        String[] blood_group= getResources().getStringArray(R.array.Blood_Group);
+        ArrayAdapter<String> arrayAdapter_blood_group = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,blood_group);
+        binding.serviceDetail2.setAdapter(arrayAdapter_language);
        binding.city2.setAdapter(arrayAdapter_gender);
-       binding.rationCard2.setAdapter(arrayAdapter_gender);
-       binding.city2.setAdapter(arrayAdapter_gender);
+       binding.rationCard2.setAdapter(arrayAdapter_ration_card);
        binding.country2.setAdapter(arrayAdapter_gender);
        binding.gender2.setAdapter(arrayAdapter_gender);
-       binding.bloodGroup2.setAdapter(arrayAdapter_gender);
+       binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
        binding.state2.setAdapter(arrayAdapter_gender);
-//        CountryCodePicker countryCodePicker = findViewById(R.id.countryPicker);
-//
-//        countryCodePicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
-//            @Override
-//            public void onCountrySelected() {
-//                String selectedCountryCode = countryCodePicker.getSelectedCountryCode();
-//                String selectedCountryName = countryCodePicker.getSelectedCountryName();
-//                // Handle the selected country code and name
-//            }
-//        });
-       // binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,22 +72,7 @@ public class SacWorldActivity extends AppCompatActivity {
             }
         });
 
-        //AutoCompleteTextView dateOfBirthEditText = findViewById(R.id.dateOfBirth2);
-//        binding.dateOfBirth2.setOnTouchListener((v, event) -> {
-//            // Check if the touch event is on the right drawable
-//            if (event.getAction() == MotionEvent.ACTION_UP) {
-//                int drawableRight = 2; // Index of the right drawable
-//                Rect bounds = binding.getCompoundDrawables()[drawableRight].getBounds();
-//
-//                // Check if the touch event is within the bounds of the right drawable
-//                if (event.getRawX() >= (v.getRight() - bounds.width())) {
-//                    showDatePicker();
-//                    return true; // Consume the touch event
-//                }
-//            }
-//            return false; // Allow other touch events to be handled
-//        });
-        // Find the AutoCompleteTextView for Date of Birth
+
         final AutoCompleteTextView dateOfBirthTextView = findViewById(R.id.dateOfBirth2);
 
         // Set a click listener on the AutoCompleteTextView to open DatePickerDialog

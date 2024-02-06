@@ -51,6 +51,7 @@ public class DashboardScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_screen);
         addDrawerLayoutAndMenu();
+        // Get the default toolbar provided by AppCompatActivity
 
         setDrawable();
         recyclerView = findViewById(R.id.recyclerView);
