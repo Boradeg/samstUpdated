@@ -50,10 +50,15 @@ public class DashboardScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_screen);
-        addDrawerLayoutAndMenu();
-        // Get the default toolbar provided by AppCompatActivity
 
+        // Find the DrawerLayout in the layout XML and assign it to the drawerLayout variable
+        drawerLayout = findViewById(R.id.drawerLayout);
+
+        // Set up the toolbar and navigation drawer
         setDrawable();
+        addDrawerLayoutAndMenu();
+
+        // Initialize RecyclerView and fetch data
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new EventAdapter(new ArrayList<>());
@@ -61,6 +66,8 @@ public class DashboardScreen extends AppCompatActivity {
 
         fetchData();
     }
+
+
     private void fetchData() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://sidhman.in/skmarati/new/admin/admin-api/")
