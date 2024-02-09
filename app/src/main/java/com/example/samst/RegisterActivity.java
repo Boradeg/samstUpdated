@@ -237,7 +237,7 @@ public class RegisterActivity extends AppCompatActivity {
                 return true;
 
             } else if (itemId == R.id.menu_Registration) {
-                startActivity(new Intent(RegisterActivity.this, RegisterActivity.class));
+                startActivity(new Intent(RegisterActivity.this, RegisterTabActivity.class));
                 // Handle Registration click
                 return true;
 

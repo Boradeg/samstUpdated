@@ -21,6 +21,7 @@ public class RegisterTabActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
         getSupportActionBar().hide();
+
         // Set up ViewPager and TabLayout
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);

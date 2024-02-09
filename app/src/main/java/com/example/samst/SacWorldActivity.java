@@ -413,7 +413,7 @@ public class SacWorldActivity extends AppCompatActivity {
                 return true;
 
             } else if (itemId == R.id.menu_Registration) {
-                startActivity(new Intent(SacWorldActivity.this, RegisterActivity.class));
+                startActivity(new Intent(SacWorldActivity.this, RegisterTabActivity.class));
                 // Handle Registration click
                 return true;
             } else if (itemId == R.id.menu_Home) {

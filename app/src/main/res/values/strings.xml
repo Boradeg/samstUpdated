@@ -8,6 +8,12 @@
         <item>Hindi</item>
         <item>English</item>
     </string-array>
+    <string-array name="Marial_status">
+        <item>Un-Married</item>
+        <item>Windower/Window</item>
+        <item>Divorce</item>
+        <item>Married</item>
+    </string-array>
     <string-array name="Gender">
         <item>Male</item>
         <item>Female</item>
@@ -36,8 +42,64 @@
         <item>Service</item>
         <item>buisness</item>
     </string-array>
+    <string-array name="Height_feet">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
     <string-array name="Looking_for">
         <item>Bride</item>
         <item>Groom</item>
+    </string-array>
+    <string-array name="Believe_horoscope">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="lens">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="charan">
+        <item>Pada 1</item>
+        <item>Pada 2</item>
+        <item>Pada 3</item>
+        <item>Pada 4</item>
+    </string-array>
+    <string-array name="Nadi">
+        <item>Aadi Nadi</item>
+        <item>Madhya Nadi</item>
+        <item>Antya Nadi</item>
+    </string-array>
+    <string-array name="Gana">
+        <item>Deva</item>
+        <item>Manushya</item>
+        <item>Rakshsa</item>
+    </string-array>
+    <string-array name="service_type">
+        <item>Government</item>
+        <item>private</item>
+        <item>Self Employed</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="Spectacles">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="Mangal">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+    <string-array name="Complexion">
+        <item>Very Fair</item>
+        <item>Fair</item>
+        <item>Wheatish</item>
+        <item>Dark</item>
     </string-array>
 </resources>

@@ -128,7 +128,7 @@ public class DashboardScreen extends AppCompatActivity {
                 return true;
 
             } else if (itemId == R.id.menu_Registration) {
-                startActivity(new Intent(DashboardScreen.this, RegisterActivity.class));
+                startActivity(new Intent(DashboardScreen.this, RegisterTabActivity.class));
                 // Handle Registration click
                 return true;
             } else if (itemId == R.id.menu_Home) {
