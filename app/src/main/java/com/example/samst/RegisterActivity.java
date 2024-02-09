@@ -44,7 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                 validateDropDownField();
                 validateFields();
-
             }
         });
 

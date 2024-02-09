@@ -14,22 +14,30 @@
         <item>Other</item>
     </string-array>
     <string-array name="Country">
-        <item>india</item><item>Bangladesh</item>
+        <item>india</item>
+        <item>Bangladesh</item>
 
     </string-array>
     <string-array name="Blood_Group">
-        <item>A+</item><item>B+</item>
-        <item>AB+</item><item>A-</item>
-        <item>B-</item><item>AB-</item>
-        <item>O+</item><item>O-</item>
+        <item>A+</item>
+        <item>B+</item>
+        <item>AB+</item>
+        <item>A-</item>
+        <item>B-</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
     </string-array>
     <string-array name="Ration_card">
-        <item>Green</item><item>White</item>
+        <item>Green</item>
+        <item>White</item>
     </string-array>
     <string-array name="Service_buisness_detail">
-        <item>Service</item><item>buisness</item>
+        <item>Service</item>
+        <item>buisness</item>
     </string-array>
     <string-array name="Looking_for">
-        <item>Bride</item><item>Groom</item>
+        <item>Bride</item>
+        <item>Groom</item>
     </string-array>
 </resources>
