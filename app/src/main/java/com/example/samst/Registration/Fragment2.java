@@ -1,4 +1,4 @@
-package com.example.samst;
+package com.example.samst.Registration;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.samst.R;
 import com.example.samst.databinding.Fragment2Binding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;

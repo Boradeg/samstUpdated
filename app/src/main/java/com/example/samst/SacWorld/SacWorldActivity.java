@@ -1,33 +1,42 @@
-package com.example.samst;
+package com.example.samst.SacWorld;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.samst.databinding.ActivityRegisterBinding;
+import com.example.samst.Dashboard.DashboardScreen;
+import com.example.samst.R;
+import com.example.samst.Registration.RegisterTabActivity;
+import com.example.samst.SignInScreen;
 import com.example.samst.databinding.ActivitySacWorldBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.hbb20.CountryCodePicker;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -35,6 +44,10 @@ import java.util.Map;
 import java.util.Objects;
 
 public class SacWorldActivity extends AppCompatActivity {
+    private static final int REQUEST_PICK_IMAGE = 1;
+    private static final int REQUEST_CAPTURE_IMAGE = 2;
+    private static final int PERMISSION_REQUEST_CODE = 100;
+    private ImageView imageView;
     private DrawerLayout drawerLayout;
     private ActivitySacWorldBinding binding;
     @SuppressLint("ClickableViewAccessibility")
@@ -44,6 +57,9 @@ public class SacWorldActivity extends AppCompatActivity {
         binding = ActivitySacWorldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         addDrawerLayoutAndMenu();
+
+        imageView = findViewById(R.id.imageView);
+        binding.userImage9.setOnClickListener(v -> showOptions());
 
         String[] service_buisness = getResources().getStringArray(R.array.Service_buisness_detail);
         ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,service_buisness);
@@ -75,8 +91,6 @@ public class SacWorldActivity extends AppCompatActivity {
 
 
         final AutoCompleteTextView dateOfBirthTextView = findViewById(R.id.dateOfBirth2);
-
-        // Set a click listener on the AutoCompleteTextView to open DatePickerDialog
         dateOfBirthTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,7 +173,7 @@ public class SacWorldActivity extends AppCompatActivity {
         String annualFamilyIncome2 = binding.annualFamilyIncome2.getText().toString().trim();
         String pincode2 = binding.pincode2.getText().toString().trim();
         String adharNumberPattern = "^[2-9]{1}[0-9]{11}$";
-        String voterIdPattern = "^[a-zA-Z]{3}[0-9]{7}$";
+        String voterIdPattern = "^[a-zA-Z0-9]+$";
         String rationCardNumberPattern = "^[a-zA-Z0-9]+$";
 
         String pincodePattern = "^[1-9][0-9]{5}$";
@@ -201,6 +215,7 @@ public class SacWorldActivity extends AppCompatActivity {
         }
 
         // Validate Voter ID
+
         if (TextUtils.isEmpty(voterId2)) {
             errorMap.put(binding.voterId2, "Voter ID is required.");
         } else if (!voterId2.matches(voterIdPattern)) {
@@ -236,12 +251,7 @@ public class SacWorldActivity extends AppCompatActivity {
             binding.email2.setError(null); // Clear error
         }
 
-        //Map<TextInputLayout, String> errorMap = new HashMap<>();
-        if (TextUtils.isEmpty(annualFamilyIncome2)) {
-            errorMap.put(binding.annualFamilyIncome2, "Income is required.");
-        } else {
-            binding.annualFamilyIncome2.setError(null); // Clear error
-        }
+
 
         if (TextUtils.isEmpty(firstNameFamilyHead2)) {
             errorMap.put(binding.firstNameFamilyHead2, "Name is required.");
@@ -345,11 +355,7 @@ public class SacWorldActivity extends AppCompatActivity {
             binding.adharNumber2.setError(null); // Clear error
         }
 
-        if (TextUtils.isEmpty(voterId2)) {
-            errorMap.put(binding.voterId2, "Voter ID is required.");
-        } else {
-            binding.voterId2.setError(null); // Clear error
-        }
+
 
         if (TextUtils.isEmpty(rationCard)) {
             errorMap.put(binding.rationCard2, "Ration Card is required.");
@@ -426,7 +432,8 @@ public class SacWorldActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         );
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
         // Set up NavigationView listener
         NavigationView navigationView = findViewById(R.id.navigationView);
@@ -444,7 +451,7 @@ public class SacWorldActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.menu_Home) {
                 startActivity(new Intent(SacWorldActivity.this, DashboardScreen.class));
-                // Handle Logout click
+                // Handle Home click
                 return true;
             } else if (itemId == R.id.menu_logout) {
                 startActivity(new Intent(SacWorldActivity.this, SignInScreen.class));
@@ -456,20 +463,15 @@ public class SacWorldActivity extends AppCompatActivity {
             }
         });
 
-
-        // Add DrawerListener after initializing drawerLayout
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             int textColor = Color.parseColor("#FDFDFD");
-            actionBar.setTitle("Form");
+            actionBar.setTitle("SAK WORLD");
             actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "Dashboard" + "</font>"));
+            actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "SAK WORLD" + "</font>"));
         }
-
-
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -484,4 +486,71 @@ public class SacWorldActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    private void showOptions() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Image Source");
+        builder.setItems(new CharSequence[]{"Gallery", "Camera"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        openGallery();
+                        break;
+                    case 1:
+                        openCamera();
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_PICK_IMAGE);
+    }
+
+    private void openCamera() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
+            return;
+        }
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_CAPTURE_IMAGE);
+        } else {
+            Toast.makeText(this, "No camera app found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_PICK_IMAGE && data != null) {
+                Uri selectedImageUri = data.getData();
+                imageView.setImageURI(selectedImageUri);
+            } else if (requestCode == REQUEST_CAPTURE_IMAGE && data != null) {
+                Bundle extras = data.getExtras();
+                if (extras != null && extras.containsKey("data")) {
+                    // Get the captured image and set it to the ImageView
+                    imageView.setImageBitmap((android.graphics.Bitmap) extras.get("data"));
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }

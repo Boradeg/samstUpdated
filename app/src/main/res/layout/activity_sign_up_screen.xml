@@ -91,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:backgroundTint="@color/Red"
+            android:background="@drawable/gredientbtn"
             android:text="Sign Up"
             android:layout_marginTop="20dp"
             android:textColor="@color/white"

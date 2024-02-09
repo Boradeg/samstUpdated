@@ -6,7 +6,7 @@
     android:id="@+id/dLayout"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,15 +15,15 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="20dp"
-                android:layout_gravity="center_horizontal"
-                android:padding="10dp"
-                android:src="@drawable/add_profile_register"
 
-                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userImage2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/add_profile_register"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_centerHorizontal="true"/>
 
 
 
@@ -1008,7 +1008,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:background="@drawable/gredientbtn"
-                android:text="Submit"
+                android:text="Next"
                 android:layout_margin="20dp"
                 android:textColor="@color/white"
                 android:textStyle="bold"

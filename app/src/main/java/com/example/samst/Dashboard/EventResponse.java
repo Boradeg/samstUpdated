@@ -1,4 +1,4 @@
-package com.example.samst;
+package com.example.samst.Dashboard;
 public class EventResponse {
 
     private int id;

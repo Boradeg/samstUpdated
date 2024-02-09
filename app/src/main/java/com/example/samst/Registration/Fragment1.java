@@ -1,6 +1,11 @@
-package com.example.samst;
+package com.example.samst.Registration;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.samst.R;
 import com.example.samst.databinding.Fragment1Binding;
 import com.example.samst.databinding.Fragment2Binding;
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,11 +30,35 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fragment1 extends Fragment {
+    private static final int REQUEST_PICK_IMAGE = 1;
+    private static final int REQUEST_CAPTURE_IMAGE = 2;
+    private static final int PERMISSION_REQUEST_CODE = 100;
+   // private ImageView imageView;
 
     private EditText idAge;
     private Fragment1Binding binding2; // Declare binding variable
+
+    // Inside your fragment class
+    private CircleImageView userImage5;
 
     @Nullable
     @Override
@@ -36,19 +67,19 @@ public class Fragment1 extends Fragment {
         binding2 = Fragment1Binding.inflate(inflater, container, false);
         View rootView = binding2.getRoot(); // Get the root view from the binding
         setDropDownValues();
+
         // Check if rootView is not null before accessing its children views
         if (rootView != null) {
             idAge = rootView.findViewById(R.id.id_age);
             // Initialize more EditText fields similarly
-
             Button buttonInFragment1 = rootView.findViewById(R.id.submitButton);
-//
+             userImage5=rootView.findViewById(R.id.userImage2);
+            userImage5.setOnClickListener(v -> showOptions());
             buttonInFragment1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     validateDropDownField(rootView);
                     validateFields();
-
                     // Switch to Fragment2 when the button is clicked
 //                RegisterTabActivity activity = (RegisterTabActivity) getActivity();
 //                if (activity != null) {
@@ -61,7 +92,72 @@ public class Fragment1 extends Fragment {
         return rootView;
     }
 
+    private void showOptions() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Select Image Source");
+        builder.setItems(new CharSequence[]{"Gallery", "Camera"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        openGallery();
+                        break;
+                    case 1:
+                        openCamera();
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
 
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQUEST_PICK_IMAGE);
+    }
+
+    private void openCamera() {
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CODE);
+            return;
+        }
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_CAPTURE_IMAGE);
+        } else {
+            Toast.makeText(getContext(), "No camera app found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == REQUEST_PICK_IMAGE && data != null) {
+                Uri selectedImageUri = data.getData();
+                userImage5.setImageURI(selectedImageUri);
+            } else if (requestCode == REQUEST_CAPTURE_IMAGE && data != null) {
+                Bundle extras = data.getExtras();
+                if (extras != null && extras.containsKey("data")) {
+                    // Get the captured image and set it to the ImageView
+                    userImage5.setImageBitmap((android.graphics.Bitmap) extras.get("data"));
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera();
+            } else {
+                Toast.makeText(getContext(), "Camera permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     private void setDropDownValues() {
         String[] Looking_for = getResources().getStringArray(R.array.Looking_for);
         String[] Gender = getResources().getStringArray(R.array.Gender);

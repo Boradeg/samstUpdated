@@ -3,13 +3,14 @@ package com.example.samst;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.samst.Dashboard.DashboardScreen;
 import com.example.samst.databinding.ActivitySignUpScreenBinding;
+
+import java.util.Objects;
 
 
 public class SignUpScreen extends AppCompatActivity {
@@ -26,13 +27,13 @@ public class SignUpScreen extends AppCompatActivity {
         setContentView(view);
 
         // Hide ActionBar
-        getSupportActionBar().hide();
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
         // Access views directly using the generated binding class
         binding.signUpButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignUpScreen.this, DashboardScreen.class));
+                finish();
             }
         });
 
@@ -40,6 +41,7 @@ public class SignUpScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignUpScreen.this, SignInScreen.class));
+                finish();
             }
         });
     }

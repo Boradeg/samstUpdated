@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/sacWorldActivity"
-        android:name="com.example.samst.SacWorldActivity"
+        android:name="com.example.samst.SacWorld.SacWorldActivity"
         android:label="activity_sac_world"
         tools:layout="@layout/activity_sac_world" />
     <activity

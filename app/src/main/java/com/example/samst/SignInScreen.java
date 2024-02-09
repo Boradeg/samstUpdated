@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.samst.databinding.ActivityMainBinding;
+import com.example.samst.Dashboard.DashboardScreen;
 import com.example.samst.databinding.ActivitySignInScreenBinding;
+
+import java.util.Objects;
 
 public class SignInScreen extends AppCompatActivity {
     private ActivitySignInScreenBinding binding;
@@ -17,13 +19,13 @@ public class SignInScreen extends AppCompatActivity {
         binding = ActivitySignInScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         // Hide ActionBar
-        getSupportActionBar().hide();
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
         // Access views directly using the generated binding class
         binding.signInButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignInScreen.this, DashboardScreen.class));
+                finish();
             }
         });
 
@@ -32,6 +34,7 @@ public class SignInScreen extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(SignInScreen.this,
                         SignUpScreen.class));
+                finish();
             }
         });
 

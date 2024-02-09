@@ -6,7 +6,7 @@
     android:id="@+id/dLayout3"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".SacWorldActivity">
+    tools:context=".SacWorld.SacWorldActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,19 +16,10 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/view"
-                android:layout_width="2dp"
-                android:gravity="center_horizontal"
-                 android:layout_gravity="center_horizontal"
-                android:layout_height="match_parent"
-                android:text="crcfmkf"
-                android:visibility="gone"
-                android:textColor="@color/black"
-                />
+
 
             <ImageView
-                android:id="@+id/userImage"
+                android:id="@+id/userImage9"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
@@ -427,7 +418,7 @@
                         android:cursorVisible="true"
                         android:layout_height="wrap_content"
                         android:hint="Ration Card Number*"
-                        android:inputType="number" />
+                         />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>

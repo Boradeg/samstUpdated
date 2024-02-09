@@ -1,25 +1,26 @@
-package com.example.samst;
+package com.example.samst.Dashboard;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.samst.R;
+import com.example.samst.Registration.RegisterTabActivity;
+import com.example.samst.SacWorld.SacWorldActivity;
+import com.example.samst.SignInScreen;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -31,14 +32,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 //
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-
-import com.bumptech.glide.Glide;
 
 public class DashboardScreen extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -57,6 +51,7 @@ public class DashboardScreen extends AppCompatActivity {
         // Set up the toolbar and navigation drawer
         setDrawable();
         addDrawerLayoutAndMenu();
+
 
         // Initialize RecyclerView and fetch data
         recyclerView = findViewById(R.id.recyclerView);
@@ -142,13 +137,10 @@ public class DashboardScreen extends AppCompatActivity {
                 startActivity(new Intent(DashboardScreen.this, DashboardScreen.class));
                 // Handle Logout click
                 return true;
-
-
-        } else if (itemId == R.id.menu_logout) {
+            } else if (itemId == R.id.menu_logout) {
                 startActivity(new Intent(DashboardScreen.this, SignInScreen.class));
                 // Handle Logout click
                 return true;
-
             } else {
                 return false;
             }
@@ -168,17 +160,21 @@ public class DashboardScreen extends AppCompatActivity {
 
     }
 
-
-
     private void setDrawable() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         );
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        // Set custom toggle icon
+        Drawable customToggleIcon = ContextCompat.getDrawable(this, R.drawable.add_profile);
+        toggle.setDrawerIndicatorEnabled(false); // Disable default toggle icon
+        toggle.setHomeAsUpIndicator(customToggleIcon); // Set custom toggle icon
+
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
+
     // Add this method to handle the toggle button click event
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -194,6 +190,7 @@ public class DashboardScreen extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
 
 

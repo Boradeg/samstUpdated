@@ -1,4 +1,4 @@
-package com.example.samst;
+package com.example.samst.Dashboard;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

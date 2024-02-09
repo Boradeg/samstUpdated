@@ -1,4 +1,4 @@
-package com.example.samst;
+package com.example.samst.Registration;
 
 import android.content.Context;
 import android.util.AttributeSet;

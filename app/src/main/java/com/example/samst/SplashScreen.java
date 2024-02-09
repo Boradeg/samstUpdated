@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.util.Objects;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override
@@ -12,6 +14,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         // Hide the ActionBar
+       // Objects.requireNonNull(getSupportActionBar()).hide();
         getSupportActionBar().hide();
 
         // Add a delay of 2 seconds
@@ -20,6 +23,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 // Start the main activity after the delay
                 startActivity(new Intent(SplashScreen.this,MainActivity.class));
+
                 finish(); // close the current activity
             }
         }, 2000); // 2000 milliseconds = 2 seconds

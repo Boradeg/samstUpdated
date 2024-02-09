@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.example.samst.databinding.ActivityMainBinding;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     @Override
@@ -17,10 +19,12 @@ public class MainActivity extends AppCompatActivity {
         // Initialize View Binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Objects.requireNonNull(getSupportActionBar()).hide();
         binding.visitAppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SignInScreen.class));
+                finish();
             }
         });
 
