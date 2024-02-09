@@ -57,7 +57,6 @@
                         style="@style/LoginTextInputInnerFieldStyle"
                         android:layout_width="match_parent"
                         android:textCursorDrawable="@null"
-
                         android:cursorVisible="true"
                         android:layout_height="wrap_content"
                         android:hint="Name Of Family Head*"
@@ -99,6 +98,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/layout_dateOfBirth2"
+
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500"
 
@@ -122,6 +123,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/layout_gender2"
+
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500"
                     >
@@ -155,6 +158,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginEnd="4dp"
+                    android:id="@+id/layout_blood_group2"
+
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500">
 
@@ -203,6 +208,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/layout_country2"
+
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500"
 
@@ -224,6 +231,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/layout_state2"
+
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500"
                     >
@@ -277,6 +286,7 @@
                     android:layout_weight="1"
                     android:layout_marginEnd="4dp"
                     app:boxStrokeColor="@color/black"
+                    android:id="@+id/layout_city2"
                     app:hintTextColor="@color/purple_500">
 
                     <AutoCompleteTextView
@@ -385,6 +395,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/layout_rationCard2"
                     android:layout_marginEnd="4dp"
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500">
@@ -536,6 +547,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/layout_service_detail2"
                     android:layout_marginEnd="4dp"
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500">

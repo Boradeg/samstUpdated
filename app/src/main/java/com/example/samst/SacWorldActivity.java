@@ -63,6 +63,7 @@ public class SacWorldActivity extends AppCompatActivity {
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                validateDropDownField();
                 if (validateFields()) {
                     // Proceed with further actions
                     showToast("Validation successful!");
@@ -84,6 +85,31 @@ public class SacWorldActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void validateDropDownField() {
+        int[] autoCompleteTextViewIds = {R.id.dateOfBirth2, R.id.gender2,R.id.blood_group2,
+                R.id.country2,R.id.state2
+                ,R.id.city2,R.id.rationCard2,R.id.service_detail2
+        }; // Add more if needed
+        int[] textInputLayoutIds = {R.id.layout_dateOfBirth2, R.id.layout_gender2,R.id.layout_blood_group2,
+                R.id.layout_country2,R.id.layout_state2
+                ,R.id.layout_city2,R.id.layout_rationCard2,R.id.layout_service_detail2
+
+        }; // Add more if needed
+
+
+        for (int i = 0; i < autoCompleteTextViewIds.length; i++) {
+            AutoCompleteTextView autoCompleteTextView = findViewById(autoCompleteTextViewIds[i]);
+            TextInputLayout textInputLayout = findViewById(textInputLayoutIds[i]);
+
+            String fieldValue = autoCompleteTextView.getText().toString().trim();
+            if (TextUtils.isEmpty(fieldValue)) {
+                textInputLayout.setError("This field is required.");
+            } else {
+                textInputLayout.setError(null); // Clear error
+            }
+        }
     }
 
     private void showDatePickerDialog(final AutoCompleteTextView autoCompleteTextView) {
