@@ -2,15 +2,24 @@ package com.example.samst.Dashboard;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -39,7 +48,15 @@ public class DashboardScreen extends AppCompatActivity {
     private EventAdapter adapter;
     private int currentEventId = 9;
     private DrawerLayout drawerLayout;
-    @SuppressLint("NonConstantResourceId")
+    private Button allButton;
+
+    private Button prevButton;
+    private Button latestButton;
+    private Button upcomingButton;
+    private Button liveButton;
+
+
+    @SuppressLint({"NonConstantResourceId", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,18 +65,77 @@ public class DashboardScreen extends AppCompatActivity {
         // Find the DrawerLayout in the layout XML and assign it to the drawerLayout variable
         drawerLayout = findViewById(R.id.drawerLayout);
 
+        allButton = findViewById(R.id.allButton);
+        prevButton = findViewById(R.id.prevButton);
+        latestButton = findViewById(R.id.latestButton);
+        upcomingButton = findViewById(R.id.upcomingButton);
+        liveButton = findViewById(R.id.liveButton);
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(DashboardScreen.this));
+        adapter = new EventAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+        fetchData();
+        allButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                resetButtonColors();
+                allButton.setBackgroundColor(getResources().getColor(R.color.Red));
+                Toast.makeText(DashboardScreen.this, "All button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetButtonColors();
+                prevButton.setBackgroundColor(getResources().getColor(R.color.Red));
+                Toast.makeText(DashboardScreen.this, "Previous button clicked", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+//
+        liveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                resetButtonColors();
+                liveButton.setBackgroundColor(getResources().getColor(R.color.Red));
+                Toast.makeText(DashboardScreen.this, "Live button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        latestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                resetButtonColors();
+                latestButton.setBackgroundColor(getResources().getColor(R.color.Red));
+                Toast.makeText(DashboardScreen.this, "Latest button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        upcomingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetButtonColors();
+                upcomingButton.setBackgroundColor(getResources().getColor(R.color.Red));
+                Toast.makeText(DashboardScreen.this, "Upcoming button clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
         // Set up the toolbar and navigation drawer
         setDrawable();
         addDrawerLayoutAndMenu();
+    }
 
-
-        // Initialize RecyclerView and fetch data
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new EventAdapter(new ArrayList<>());
-        recyclerView.setAdapter(adapter);
-
-        fetchData();
+    private void resetButtonColors() {
+        allButton.setBackgroundColor(getResources().getColor(R.color.button_bg_white));
+        prevButton.setBackgroundColor(getResources().getColor(R.color.button_bg_white));
+        liveButton.setBackgroundColor(getResources().getColor(R.color.button_bg_white));
+        latestButton.setBackgroundColor(getResources().getColor(R.color.button_bg_white));
+        upcomingButton.setBackgroundColor(getResources().getColor(R.color.button_bg_white));
     }
 
 
@@ -137,10 +213,13 @@ public class DashboardScreen extends AppCompatActivity {
                 startActivity(new Intent(DashboardScreen.this, DashboardScreen.class));
                 // Handle Logout click
                 return true;
-            } else if (itemId == R.id.menu_logout) {
+
+
+        } else if (itemId == R.id.menu_logout) {
                 startActivity(new Intent(DashboardScreen.this, SignInScreen.class));
                 // Handle Logout click
                 return true;
+
             } else {
                 return false;
             }
@@ -152,30 +231,31 @@ public class DashboardScreen extends AppCompatActivity {
         toggle.syncState();
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
+
             int textColor = Color.parseColor("#FDFDFD");
             actionBar.setTitle("Dashboard");
+            actionBar.setLogo(R.drawable.logo);
+
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "Dashboard" + "</font>"));
         }
 
     }
-
     private void setDrawable() {
+        Drawable customToggleIcon = ContextCompat.getDrawable(this, R.drawable.add_profile);
+
+        customToggleIcon.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN); // Change PorterDuff mode
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         );
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        // Set custom toggle icon
-        Drawable customToggleIcon = ContextCompat.getDrawable(this, R.drawable.add_profile);
-        toggle.setDrawerIndicatorEnabled(false); // Disable default toggle icon
-        toggle.setHomeAsUpIndicator(customToggleIcon); // Set custom toggle icon
-
+        getSupportActionBar().setHomeAsUpIndicator(customToggleIcon); // Set custom toggle icon
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
 
-    // Add this method to handle the toggle button click event
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -190,6 +270,33 @@ public class DashboardScreen extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+
+        // Retrieve the SearchView and configure it
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        // Configure the SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Handle search query submission
+                Toast.makeText(DashboardScreen.this, query, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Handle search query text change
+                return false;
+            }
+        });
+
+        return true;
+    }
+
 
 }
 

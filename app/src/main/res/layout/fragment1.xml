@@ -375,6 +375,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/age_layout"
                     android:layout_marginStart="4dp"
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500">

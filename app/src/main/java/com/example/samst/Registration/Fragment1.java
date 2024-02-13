@@ -1,20 +1,23 @@
 package com.example.samst.Registration;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,29 +26,18 @@ import androidx.fragment.app.Fragment;
 
 import com.example.samst.R;
 import com.example.samst.databinding.Fragment1Binding;
-import com.example.samst.databinding.Fragment2Binding;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fragment1 extends Fragment {
@@ -70,26 +62,61 @@ public class Fragment1 extends Fragment {
 
         // Check if rootView is not null before accessing its children views
         if (rootView != null) {
+            validateAge(rootView);
             idAge = rootView.findViewById(R.id.id_age);
-            // Initialize more EditText fields similarly
             Button buttonInFragment1 = rootView.findViewById(R.id.submitButton);
              userImage5=rootView.findViewById(R.id.userImage2);
+             //add image
             userImage5.setOnClickListener(v -> showOptions());
+            //show date picker
+            final AutoCompleteTextView dateOfBirthTextView = rootView.findViewById(R.id.id_dateOfBirth);
+            dateOfBirthTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showDatePickerDialog(dateOfBirthTextView);
+                }
+            });
+            //after click on submit button
             buttonInFragment1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     validateDropDownField(rootView);
                     validateFields();
-                    // Switch to Fragment2 when the button is clicked
-//                RegisterTabActivity activity = (RegisterTabActivity) getActivity();
-//                if (activity != null) {
-//                    activity.switchToFragment2();
-//                }
                 }
             });
         }
 
         return rootView;
+    }
+
+    private void validateAge(View rootView) {
+        final TextInputLayout ageInputLayout =  rootView.findViewById(R.id.age_layout);
+        final EditText ageEditText = rootView.findViewById(R.id.id_age);
+
+        ageEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Not needed
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // Not needed
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String ageText = editable.toString();
+                if (!ageText.isEmpty()) {
+                    int age = Integer.parseInt(ageText);
+                    if (age >= 100) {
+                        ageInputLayout.setError("Age must be less than 100");
+                    } else {
+                        ageInputLayout.setError(null);
+                    }
+                }
+            }
+        });
     }
 
     private void showOptions() {
@@ -127,6 +154,25 @@ public class Fragment1 extends Fragment {
         } else {
             Toast.makeText(getContext(), "No camera app found", Toast.LENGTH_SHORT).show();
         }
+    }
+    private void showDatePickerDialog(final AutoCompleteTextView autoCompleteTextView) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                requireContext(),
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        String formattedDate = String.format("%02d/%02d/%04d", day, month + 1, year);
+                        autoCompleteTextView.setText(formattedDate);
+                    }
+                },
+                year, month, day);
+
+        datePickerDialog.show();
     }
 
     @Override
@@ -169,10 +215,27 @@ public class Fragment1 extends Fragment {
         String[] Spectacles = getResources().getStringArray(R.array.Spectacles);
         String[] lens = getResources().getStringArray(R.array.lens);
         String[] service_type = getResources().getStringArray(R.array.service_type);
+        String[] Service_buisness_detail2 = getResources().getStringArray(R.array.Service_buisness_detail);
         String[] charan = getResources().getStringArray(R.array.charan);
         String[] nadi = getResources().getStringArray(R.array.Nadi);
         String[] Believe_horoscope = getResources().getStringArray(R.array.Believe_horoscope);
         String[] Mangal = getResources().getStringArray(R.array.Mangal);
+        String[] Nakshtra = getResources().getStringArray(R.array.Nakshtra);
+        String[] Gotra = getResources().getStringArray(R.array.Gotra);
+        String[] Rashi = getResources().getStringArray(R.array.Rashi);
+        String[] Yoni = getResources().getStringArray(R.array.Yoni);
+        String[] Swami = getResources().getStringArray(R.array.Swami);
+        ArrayAdapter<String> arrayAdapter_swami = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Swami);
+        binding2.idSwami.setAdapter(arrayAdapter_swami);
+        ArrayAdapter<String> arrayAdapter_nakshtra = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Nakshtra);
+        binding2.idNakshtra.setAdapter(arrayAdapter_nakshtra);
+        ArrayAdapter<String> arrayAdapter_gotra = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Gotra);
+        binding2.idGotra.setAdapter(arrayAdapter_gotra);
+        ArrayAdapter<String> arrayAdapter_rashi = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Rashi);
+        binding2.idRashi.setAdapter(arrayAdapter_rashi);
+        ArrayAdapter<String> arrayAdapter_yoni = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Yoni);
+        binding2.idYoni.setAdapter(arrayAdapter_yoni);
+
         ArrayAdapter<String> arrayAdapter_gender = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Gender);
         binding2.idGender.setAdapter(arrayAdapter_gender);
 
@@ -184,6 +247,9 @@ public class Fragment1 extends Fragment {
 
         ArrayAdapter<String> arrayAdapter_service_type = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,service_type);
         binding2.idServiceType.setAdapter(arrayAdapter_service_type);
+        ArrayAdapter<String> arrayAdapter_service_business_detail = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout,Service_buisness_detail2);
+        binding2.idServiceDetail.setAdapter(arrayAdapter_service_business_detail);
+
 
         ArrayAdapter<String> arrayAdapter_height_feet = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout, Height_feet);
         binding2.idHeightInFeet.setAdapter(arrayAdapter_height_feet);

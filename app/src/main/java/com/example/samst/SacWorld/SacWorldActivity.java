@@ -43,11 +43,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class SacWorldActivity extends AppCompatActivity {
     private static final int REQUEST_PICK_IMAGE = 1;
     private static final int REQUEST_CAPTURE_IMAGE = 2;
     private static final int PERMISSION_REQUEST_CODE = 100;
-    private ImageView imageView;
+    private CircleImageView imageView;
     private DrawerLayout drawerLayout;
     private ActivitySacWorldBinding binding;
     @SuppressLint("ClickableViewAccessibility")
@@ -57,10 +59,8 @@ public class SacWorldActivity extends AppCompatActivity {
         binding = ActivitySacWorldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         addDrawerLayoutAndMenu();
-
-        imageView = findViewById(R.id.imageView);
-        binding.userImage9.setOnClickListener(v -> showOptions());
-
+        imageView = findViewById(R.id.image_sak_world);
+        imageView.setOnClickListener(v -> showOptions());
         String[] service_buisness = getResources().getStringArray(R.array.Service_buisness_detail);
         ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,service_buisness);
         String[] gender = getResources().getStringArray(R.array.Gender);
@@ -76,7 +76,7 @@ public class SacWorldActivity extends AppCompatActivity {
        binding.gender2.setAdapter(arrayAdapter_gender);
        binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
        binding.state2.setAdapter(arrayAdapter_gender);
-        binding.submitButton.setOnClickListener(new View.OnClickListener() {
+       binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateDropDownField();
@@ -97,8 +97,6 @@ public class SacWorldActivity extends AppCompatActivity {
                 showDatePickerDialog(dateOfBirthTextView);
             }
         });
-
-
     }
 
     private void validateDropDownField() {
@@ -397,33 +395,7 @@ public class SacWorldActivity extends AppCompatActivity {
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-    private void showDatePicker() {
-        // Your existing DatePickerDialog code
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                (view, selectedYear, monthOfYear, dayOfMonth) -> {
-                    String selectedDate = String.format("%02d/%02d/%04d", dayOfMonth, monthOfYear + 1, selectedYear);
-                    Toast.makeText(this, selectedDate, Toast.LENGTH_SHORT).show();
-                    // Add your logic here after selecting the date
-                    // For example, update the TextInputEditText with the selected date
-                    updateDateOfBirth(selectedDate);
-                },
-                year,
-                month,
-                day
-        );
-        datePickerDialog.show();
-    }
-
-    private void updateDateOfBirth(String selectedDate) {
-        AutoCompleteTextView dateOfBirthEditText = findViewById(R.id.dateOfBirth2);
-        dateOfBirthEditText.setText(selectedDate);
-    }
     private void addDrawerLayoutAndMenu() {
         // Initialize drawerLayout before using it
         drawerLayout = findViewById(R.id.dLayout3);
@@ -470,21 +442,6 @@ public class SacWorldActivity extends AppCompatActivity {
             actionBar.setDisplayShowTitleEnabled(true);
             actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "SAK WORLD" + "</font>"));
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        );
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
     private void showOptions() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -552,5 +509,28 @@ public class SacWorldActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+
+
 
 }

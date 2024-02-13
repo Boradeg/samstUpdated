@@ -18,14 +18,14 @@
             android:layout_height="match_parent">
 
 
-            <ImageView
-                android:id="@+id/userImage9"
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/image_sak_world"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="20dp"
                 android:padding="10dp"
-                android:src="@drawable/add_profile" />
+                android:src="@drawable/profile" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,7 +107,6 @@
                         android:layout_height="wrap_content"
                         android:hint="Date Of Birth*"
                         android:inputType="none" />
-
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
@@ -115,11 +114,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:id="@+id/layout_gender2"
-
                     app:boxStrokeColor="@color/black"
                     app:hintTextColor="@color/purple_500"
                     >
-
                     <AutoCompleteTextView
                         style="@style/LoginTextInputInnerFieldStyle"
                         android:id="@+id/gender2"

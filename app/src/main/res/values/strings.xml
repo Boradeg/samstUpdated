@@ -102,4 +102,88 @@
         <item>Wheatish</item>
         <item>Dark</item>
     </string-array>
+    <string-array name="Gotra">
+        <item>Atri</item>
+        <item>Bharadvaja</item>
+        <item>Bhrigu</item>
+        <item>Gotama</item>
+        <item>Kashyapa</item>
+        <item>Vasishtha</item>
+        <item>Vishvamitra</item>
+        <item>N/A</item>
+
+    </string-array>
+    <string-array name="Rashi">
+        <item>Mesh</item>
+        <item>Vrushabh</item>
+        <item>Mithun</item>
+        <item>kark</item>
+        <item>sinh</item>
+        <item>Kanya</item>
+        <item>Tula</item>
+        <item>Vrushchik</item>
+        <item>Dhanu</item>
+        <item>Makar</item>
+        <item>Kumbha</item>
+        <item>Meen</item>
+
+    </string-array>
+    <string-array name="Nakshtra">
+        <item>Ashvini</item>
+        <item>Bharani</item>
+        <item>Krittika</item>
+        <item>Rohini</item>
+        <item>Mrigashirsha</item>
+        <item>Ardha</item>
+        <item>Punarvasu</item>
+        <item>Pushya</item>
+        <item>Ashlesha</item>
+        <item>Magha</item>
+        <item>Purva Phalgunu</item>
+        <item>Uttara Phalguni</item>
+        <item>Hasta</item>
+        <item>Chitra</item>
+        <item>Swati</item>
+        <item>Vishaka</item>
+        <item>Anuradha</item>
+        <item>Jyeshtha</item>
+        <item>Mula</item>
+        <item>Purva Ashadha</item>
+        <item>Uttara Ashadha</item>
+        <item>Shravana</item>
+        <item>Dhanishtha</item>
+        <item>Shatabhisha</item>
+        <item>Purva Bhadrapada</item>
+        <item>Uttara Bhadrapada</item>
+        <item>Revati</item>
+
+    </string-array>
+    <string-array name="Yoni">
+        <item>Ashwa</item>
+        <item>Gaja</item>
+        <item>Mesh</item>
+        <item>Sarpa</item>
+        <item>Shwan</item>
+        <item>Marjara</item>
+        <item>Mushaka</item>
+        <item>Gau</item>
+        <item>Mahisha</item>
+        <item>Mriga</item>
+        <item>Vanara</item>
+        <item>Nakul</item>
+        <item>Singha</item>
+        <item>N/A</item>
+    </string-array>
+    <string-array name="Swami">
+        <item>Surya</item>
+        <item>Chandra</item>
+        <item>Angaarakan</item>
+        <item>Budha</item>
+        <item>Guru Fair</item>
+        <item>Sukra</item>
+        <item>Shahi</item>
+        <item>Rahu</item>
+        <item>Ketu</item>
+        <item>N/A</item>
+    </string-array>
 </resources>

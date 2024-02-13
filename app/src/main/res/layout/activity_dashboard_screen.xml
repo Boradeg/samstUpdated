@@ -11,72 +11,104 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardViewWelcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="5dp"
-            android:visibility="gone"
-            android:backgroundTint="@color/white"
-            app:cardElevation="6dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:padding="12dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/userImage"
-                    android:layout_width="50dp"
-                    android:padding="10dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/profile"
-                    />
-                <TextView
-                    android:id="@+id/UserNameWelcome"
-                    android:layout_width="wrap_content"
-                    android:layout_toRightOf="@id/userImage"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Welcome , Webuni"
-                    android:textStyle="italic"
-                    android:layout_marginTop="10dp"
-                    android:textSize="25sp"
-                    android:textColor="@color/black"
-                    />
-
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/eventTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cardViewWelcome"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:visibility="gone"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Event"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
+            android:layout_below="@id/horizontal_view"
             android:layout_height="match_parent"
-            android:layout_below="@id/eventTextView"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             tools:ignore="NotSibling"
             tools:listitem="@layout/item_rv" />
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:padding="3dp"
+            android:visibility="gone"
+            android:id="@+id/searchLayout"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/search_view_bg"
+            app:queryHint="Search..."
+            app:iconifiedByDefault="false"
+            android:layout_height="wrap_content">
+
+        </androidx.appcompat.widget.SearchView>
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/horizontal_view"
+            >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/buttonLayout"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="4dp"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:id="@+id/allButton"
+                android:padding="10dp"
+                android:layout_marginHorizontal="3dp"
+                android:backgroundTint="@color/Red"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:backgroundTint="#8A8A8A"
+                android:layout_marginHorizontal="3dp"
+                android:id="@+id/liveButton"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="10dp"
+                android:text="Live"
+                android:textAllCaps="false"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Previous"
+                android:id="@+id/prevButton"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="3dp"
+                android:padding="10dp"
+                android:backgroundTint="@color/button_bg_white"
+                android:textAllCaps="false"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:backgroundTint="#8A8A8A"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginHorizontal="3dp"
+                android:padding="10dp"
+                android:id="@+id/latestButton"
+                android:text="Latest"
+                android:textAllCaps="false"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Upcoming"
+                android:id="@+id/upcomingButton"
+                android:textColor="@color/white"
+                android:backgroundTint="#8A8A8A"
+                android:layout_marginHorizontal="3dp"
+                android:padding="10dp"
+                android:textAllCaps="false"
+                />
+        </LinearLayout>
+
+        </HorizontalScrollView>
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -88,3 +120,4 @@
         app:menu="@menu/nav_drawer_menu"
         />
 </androidx.drawerlayout.widget.DrawerLayout>
+
