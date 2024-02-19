@@ -27,6 +27,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.samst.Dashboard.DashboardScreen;
@@ -34,24 +35,43 @@ import com.example.samst.R;
 import com.example.samst.Registration.RegisterTabActivity;
 import com.example.samst.SignInScreen;
 import com.example.samst.databinding.ActivitySacWorldBinding;
+import com.example.samst.stateCountryCityApi.ApiClient;
+import com.example.samst.stateCountryCityApi.ApiService;
+import com.example.samst.stateCountryCityApi.CityData;
+import com.example.samst.stateCountryCityApi.CountryData;
+import com.example.samst.stateCountryCityApi.CountryRequestBody;
+import com.example.samst.stateCountryCityApi.CountryResponse;
+import com.example.samst.stateCountryCityApi.Data;
+import com.example.samst.stateCountryCityApi.ShowStatesResponse;
+import com.example.samst.stateCountryCityApi.State;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SacWorldActivity extends AppCompatActivity {
     private static final int REQUEST_PICK_IMAGE = 1;
     private static final int REQUEST_CAPTURE_IMAGE = 2;
     private static final int PERMISSION_REQUEST_CODE = 100;
     private CircleImageView imageView;
+    private AutoCompleteTextView state1;
     private DrawerLayout drawerLayout;
+    private RadioButton radioYourself, radioSomeoneElse;
+
     private ActivitySacWorldBinding binding;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,22 +81,47 @@ public class SacWorldActivity extends AppCompatActivity {
         addDrawerLayoutAndMenu();
         imageView = findViewById(R.id.image_sak_world);
         imageView.setOnClickListener(v -> showOptions());
+        radioYourself = findViewById(R.id.id_yourself);
+        radioSomeoneElse = findViewById(R.id.id_someone_else);
+        // state1 = findViewById(R.id.state2);
         String[] service_buisness = getResources().getStringArray(R.array.Service_buisness_detail);
-        ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,service_buisness);
+        ArrayAdapter<String> arrayAdapter_language = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, service_buisness);
         String[] gender = getResources().getStringArray(R.array.Gender);
-        ArrayAdapter<String> arrayAdapter_gender = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,gender);
+        ArrayAdapter<String> arrayAdapter_gender = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, gender);
         String[] ration_card = getResources().getStringArray(R.array.Ration_card);
-        ArrayAdapter<String> arrayAdapter_ration_card = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,ration_card);
-        String[] blood_group= getResources().getStringArray(R.array.Blood_Group);
-        ArrayAdapter<String> arrayAdapter_blood_group = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout,blood_group);
+        ArrayAdapter<String> arrayAdapter_ration_card = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, ration_card);
+        String[] blood_group = getResources().getStringArray(R.array.Blood_Group);
+        ArrayAdapter<String> arrayAdapter_blood_group = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, blood_group);
         binding.serviceDetail2.setAdapter(arrayAdapter_language);
-       binding.city2.setAdapter(arrayAdapter_gender);
-       binding.rationCard2.setAdapter(arrayAdapter_ration_card);
-       binding.country2.setAdapter(arrayAdapter_gender);
-       binding.gender2.setAdapter(arrayAdapter_gender);
-       binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
-       binding.state2.setAdapter(arrayAdapter_gender);
-       binding.submitButton.setOnClickListener(new View.OnClickListener() {
+        //binding.city2.setAdapter(arrayAdapter_gender);
+        String[] country_name = getResources().getStringArray(R.array.country);
+        ArrayAdapter<String> arrayAdapter_country_name = new ArrayAdapter<>(SacWorldActivity.this, R.layout.drop_down_layout, country_name);
+        binding.rationCard2.setAdapter(arrayAdapter_ration_card);
+        binding.country2.setAdapter(arrayAdapter_country_name);
+        binding.gender2.setAdapter(arrayAdapter_gender);
+        binding.bloodGroup2.setAdapter(arrayAdapter_blood_group);
+
+        popularCitySpinner2("India","Maharashtra");
+       // populateCountrySpinner();
+        populateStateSpinner("India");
+
+        //binding.state2.setAdapter(arrayAdapter_gender);
+
+        radioSomeoneElse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Deselect the first button when the second button is clicked
+                radioYourself.setChecked(false);
+            }
+        });
+        radioYourself.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Deselect the first button when the second button is clicked
+                radioSomeoneElse.setChecked(false);
+            }
+        });
+        binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateDropDownField();
@@ -100,13 +145,13 @@ public class SacWorldActivity extends AppCompatActivity {
     }
 
     private void validateDropDownField() {
-        int[] autoCompleteTextViewIds = {R.id.dateOfBirth2, R.id.gender2,R.id.blood_group2,
-                R.id.country2,R.id.state2
-                ,R.id.city2,R.id.rationCard2,R.id.service_detail2
+        int[] autoCompleteTextViewIds = {R.id.dateOfBirth2, R.id.gender2, R.id.blood_group2,
+                R.id.country2, R.id.state2
+                , R.id.city2, R.id.rationCard2, R.id.service_detail2
         }; // Add more if needed
-        int[] textInputLayoutIds = {R.id.layout_dateOfBirth2, R.id.layout_gender2,R.id.layout_blood_group2,
-                R.id.layout_country2,R.id.layout_state2
-                ,R.id.layout_city2,R.id.layout_rationCard2,R.id.layout_service_detail2
+        int[] textInputLayoutIds = {R.id.layout_dateOfBirth2, R.id.layout_gender2, R.id.layout_blood_group2,
+                R.id.layout_country2, R.id.layout_state2
+                , R.id.layout_city2, R.id.layout_rationCard2, R.id.layout_service_detail2
 
         }; // Add more if needed
 
@@ -122,6 +167,113 @@ public class SacWorldActivity extends AppCompatActivity {
                 textInputLayout.setError(null); // Clear error
             }
         }
+    }
+
+    private void popularCitySpinner2(String country, String state) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://countriesnow.space/api/v0.1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<CityData> call = apiService.getCities(country, state);
+        call.enqueue(new Callback<CityData>() {
+            @Override
+            public void onResponse(Call<CityData> call, Response<CityData> response) {
+                if (response.isSuccessful()) {
+                    CityData cityData = response.body();
+                    if (cityData != null) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                SacWorldActivity.this,
+                                R.layout.drop_down_layout,
+                                cityData.getData()
+                        );
+                        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        binding.city2.setAdapter(adapter);
+                    }
+                } else {
+                    // Handle error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityData> call, Throwable t) {
+                Toast.makeText(SacWorldActivity.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void populateStateSpinner(String country) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://countriesnow.space/api/v0.1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+        CountryRequestBody requestBody = new CountryRequestBody(country);
+        Call<ShowStatesResponse> call = apiService.getStates(requestBody);
+
+        call.enqueue(new Callback<ShowStatesResponse>() {
+            @Override
+            public void onResponse(Call<ShowStatesResponse> call, Response<ShowStatesResponse> response) {
+                if (response.isSuccessful()) {
+                    ShowStatesResponse showStatesResponse = response.body();
+                    if (showStatesResponse != null) {
+                        Data data = showStatesResponse.getData();
+                        List<State> states = data.getStates();
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                SacWorldActivity.this,
+                                R.layout.drop_down_layout
+                        );
+                        for (State state : states) {
+                            adapter.add(state.getName());
+                        }
+                        // adapter.setDropDownViewResource(R.layout.drop_down_layout);
+                        binding.state2.setAdapter(adapter);
+                    }
+                } else {
+                    Toast.makeText(SacWorldActivity.this, "Failed to fetch states data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShowStatesResponse> call, Throwable t) {
+                Toast.makeText(SacWorldActivity.this, "Error occurred while fetching states data", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void populateCountrySpinner() {
+        ApiService apiService = ApiClient.getApiService();
+        Call<CountryResponse> countryCall = apiService.getCountries();
+        countryCall.enqueue(new Callback<CountryResponse>() {
+            @Override
+            public void onResponse(Call<CountryResponse> call, Response<CountryResponse> response) {
+                if (response.isSuccessful()) {
+                    CountryResponse countryResponse = response.body();
+                    if (countryResponse != null) {
+                        List<CountryData> countries = countryResponse.getData();
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                SacWorldActivity.this,
+                                R.layout.drop_down_layout
+                        );
+                        for (CountryData countryData : countries) {
+                            adapter.add(countryData.getCountry());
+                        }
+                      //  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        binding.country2.setAdapter(adapter);
+                    }
+                } else {
+                    // Handle error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CountryResponse> call, Throwable t) {
+                // Handle failure
+            }
+        });
     }
 
     private void showDatePickerDialog(final AutoCompleteTextView autoCompleteTextView) {
@@ -143,11 +295,13 @@ public class SacWorldActivity extends AppCompatActivity {
 
         datePickerDialog.show();
     }
+
     private boolean isValidName(String name) {
         // Customize this method based on your definition of a valid name
         // For example, you can use a regular expression to check for the presence of numbers
         return !name.matches(".*\\d.*");
     }
+
     private boolean validateFields() {
         String firstNameFamilyHead2 = binding.firstNameFamilyHead2.getText().toString().trim();
         String surnameFamilyHead2 = binding.surnameFamilyHead2.getText().toString().trim();
@@ -248,7 +402,6 @@ public class SacWorldActivity extends AppCompatActivity {
         } else {
             binding.email2.setError(null); // Clear error
         }
-
 
 
         if (TextUtils.isEmpty(firstNameFamilyHead2)) {
@@ -354,7 +507,6 @@ public class SacWorldActivity extends AppCompatActivity {
         }
 
 
-
         if (TextUtils.isEmpty(rationCard)) {
             errorMap.put(binding.rationCard2, "Ration Card is required.");
         } else {
@@ -381,6 +533,7 @@ public class SacWorldActivity extends AppCompatActivity {
         // If there are errors, return false; otherwise, return true
         return errorMap.isEmpty();
     }
+
     private void setErrorForView(View view, String errorMessage) {
         if (view instanceof TextInputLayout) {
             ((TextInputLayout) view).setError(errorMessage);
@@ -443,6 +596,7 @@ public class SacWorldActivity extends AppCompatActivity {
             actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "SAK WORLD" + "</font>"));
         }
     }
+
     private void showOptions() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Select Image Source");
@@ -524,13 +678,4 @@ public class SacWorldActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
-
-
 }

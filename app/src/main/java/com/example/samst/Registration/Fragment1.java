@@ -13,11 +13,13 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,12 +27,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.samst.R;
+import com.example.samst.SacWorld.SacWorldActivity;
 import com.example.samst.databinding.Fragment1Binding;
+import com.example.samst.stateCountryCityApi.ApiClient;
+import com.example.samst.stateCountryCityApi.ApiService;
+import com.example.samst.stateCountryCityApi.CityData;
+import com.example.samst.stateCountryCityApi.CountryData;
+import com.example.samst.stateCountryCityApi.CountryRequestBody;
+import com.example.samst.stateCountryCityApi.CountryResponse;
+import com.example.samst.stateCountryCityApi.Data;
+import com.example.samst.stateCountryCityApi.ShowStatesResponse;
+import com.example.samst.stateCountryCityApi.State;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import android.Manifest;
@@ -39,12 +52,18 @@ import android.net.Uri;
 import androidx.core.app.ActivityCompat;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
     private static final int REQUEST_PICK_IMAGE = 1;
     private static final int REQUEST_CAPTURE_IMAGE = 2;
     private static final int PERMISSION_REQUEST_CODE = 100;
    // private ImageView imageView;
+   private RadioButton radioYourself, radioSomeoneElse;
 
     private EditText idAge;
     private Fragment1Binding binding2; // Declare binding variable
@@ -59,6 +78,9 @@ public class Fragment1 extends Fragment {
         binding2 = Fragment1Binding.inflate(inflater, container, false);
         View rootView = binding2.getRoot(); // Get the root view from the binding
         setDropDownValues();
+        popularCitySpinner2("India","Maharashtra");
+        populateStateSpinner("India");
+
 
         // Check if rootView is not null before accessing its children views
         if (rootView != null) {
@@ -70,6 +92,26 @@ public class Fragment1 extends Fragment {
             userImage5.setOnClickListener(v -> showOptions());
             //show date picker
             final AutoCompleteTextView dateOfBirthTextView = rootView.findViewById(R.id.id_dateOfBirth);
+            radioYourself = rootView.findViewById(R.id.id_yourself);
+            radioSomeoneElse = rootView.findViewById(R.id.id_someone_else);
+            String[] country_name = getResources().getStringArray(R.array.country);
+            ArrayAdapter<String> arrayAdapter_country_name = new ArrayAdapter<>(requireContext(), R.layout.drop_down_layout, country_name);
+            binding2.idCountry.setAdapter(arrayAdapter_country_name);
+            // Add OnClickListener to the second button
+            radioSomeoneElse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Deselect the first button when the second button is clicked
+                    radioYourself.setChecked(false);
+                }
+            });
+            radioYourself.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Deselect the first button when the second button is clicked
+                    radioSomeoneElse.setChecked(false);
+                }
+            });
             dateOfBirthTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -87,6 +129,62 @@ public class Fragment1 extends Fragment {
         }
 
         return rootView;
+    }
+    private void populateStateSpinner(String country) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://countriesnow.space/api/v0.1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ApiService apiService = retrofit.create(ApiService.class);
+        CountryRequestBody requestBody = new CountryRequestBody(country);
+        Call<ShowStatesResponse> call = apiService.getStates(requestBody);
+
+        call.enqueue(new Callback<ShowStatesResponse>() {
+            @Override
+            public void onResponse(Call<ShowStatesResponse> call, Response<ShowStatesResponse> response) {
+                if (response.isSuccessful()) {
+                    ShowStatesResponse showStatesResponse = response.body();
+                    if (showStatesResponse != null) {
+                        Data data = showStatesResponse.getData();
+                        List<State> states = data.getStates();
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                requireContext(),
+                                R.layout.drop_down_layout
+                        );
+                        for (State state : states) {
+                            adapter.add(state.getName());
+                        }
+                        // adapter.setDropDownViewResource(R.layout.drop_down_layout);
+                        binding2.idState.setAdapter(adapter);
+                        // Set up listener for state spinner
+                        binding2.idState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                String selectedState = (String) parent.getItemAtPosition(position);
+                                // Call method to populate cities based on the selected state
+                                //populateCitiesForState(country, selectedState);
+                                Toast.makeText(requireContext(), selectedState, Toast.LENGTH_SHORT).show();
+                                //popularCitySpinner2("India",selectedState);
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+                                // Handle nothing selected
+                            }
+                        });
+                    }
+                } else {
+                    Toast.makeText(requireContext(), "Failed to fetch states data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShowStatesResponse> call, Throwable t) {
+                Toast.makeText(requireContext(), "Error occurred while fetching states data", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     private void validateAge(View rootView) {
@@ -174,6 +272,41 @@ public class Fragment1 extends Fragment {
 
         datePickerDialog.show();
     }
+
+    private void popularCitySpinner2(String country, String state) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://countriesnow.space/api/v0.1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService apiService = retrofit.create(ApiService.class);
+        Call<CityData> call = apiService.getCities(country, state);
+        call.enqueue(new Callback<CityData>() {
+            @Override
+            public void onResponse(Call<CityData> call, Response<CityData> response) {
+                if (response.isSuccessful()) {
+                    CityData cityData = response.body();
+                    if (cityData != null) {
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                                requireContext(), // Use requireContext() to get the context of the fragment
+                                R.layout.drop_down_layout,
+                                cityData.getData()
+                        );
+                        // Set the adapter to the spinner
+                        binding2.idCity.setAdapter(adapter);
+                    }
+                } else {
+                    // Handle error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CityData> call, Throwable t) {
+                Toast.makeText(requireContext(), "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+            }
+        });
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

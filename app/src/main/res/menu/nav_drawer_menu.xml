@@ -4,21 +4,71 @@
     >
     <item
         android:id="@+id/menu_Home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home2"
         android:title="Home" />
-    <item
-        android:id="@+id/menu_SAKWorld"
-        android:icon="@drawable/world"
-        android:title="SAKWorld" />
-    <item
-        android:id="@+id/menu_Registration"
-        android:icon="@drawable/register"
-        android:title="Registration" />
 
     <item
-        android:id="@+id/menu_logout"
-        android:icon="@drawable/logout"
-        android:title="Logout" />
+        android:id="@+id/menu_SAKWorld3"
+        android:icon="@drawable/world"
+        android:title="SAKWorld">
+        <menu>
+            <item
+                android:id="@+id/menu_SAKWorld"
+                android:icon="@drawable/world"
+                android:title="Sak Family" />
+            <item
+                android:id="@+id/menu_membership"
+                android:icon="@drawable/membership_card"
+                android:title="Membership" />
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_SAKWorld4"
+        android:icon="@drawable/world"
+        android:title="Matrimoni">
+        <menu>
+            <item
+                android:id="@+id/menu_Registration"
+                android:icon="@drawable/register"
+                android:title="Registration" />
+
+        </menu>
+    </item>
+    <item
+        android:id="@+id/menu_matrimoni2"
+        android:icon="@drawable/world"
+        android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/menu_forun"
+                android:icon="@drawable/chat"
+                android:title="Forum" />
+            <item
+                android:id="@+id/menu_group_chat"
+                android:icon="@drawable/chat_group"
+                android:title="Group Chat" />
+            <item
+                android:id="@+id/menu_Support"
+                android:icon="@drawable/support"
+                android:title="Support" />
+
+            <item
+                android:id="@+id/menu_logout"
+                android:icon="@drawable/logout"
+                android:title="Logout" />
+
+        </menu>
+    </item>
+
+<!--    <item-->
+<!--        android:id="@+id/menu_SAKWorld"-->
+<!--        android:icon="@drawable/world"-->
+<!--        android:title="SAKWorld" />-->
+<!--    <item-->
+<!--        android:id="@+id/menu_Registration"-->
+<!--        android:icon="@drawable/register"-->
+<!--        android:title="Registration" />-->
+
 
 
 

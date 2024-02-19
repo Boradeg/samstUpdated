@@ -8,6 +8,15 @@
         <item>Hindi</item>
         <item>English</item>
     </string-array>
+    <string-array name="country">
+        <item>India</item>
+    </string-array>
+    <string-array name="Cast">
+        <item>Chitrakara2-(BCB)</item>
+        <item>Arya Kshatriyan</item>
+        <item>Naksasha</item>
+        <item>Somvamshi Arya Kshatriya</item>
+    </string-array>
     <string-array name="Marial_status">
         <item>Un-Married</item>
         <item>Windower/Window</item>

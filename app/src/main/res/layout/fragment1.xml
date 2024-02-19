@@ -25,7 +25,31 @@
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="16dp"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yourself"
+                    android:id="@+id/id_yourself"
+                    android:checked="true"
+                    android:layout_weight="1"
+                    />
+                <RadioButton
+                    android:id="@+id/id_someone_else"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="50dp"
+                    android:text="Someone Else"
+                    />
 
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
