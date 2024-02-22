@@ -51,7 +51,7 @@ public class SignUpScreen extends AppCompatActivity {
         setContentView(view);
 
         // Hide ActionBar
-        //Objects.requireNonNull(getSupportActionBar()).hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         // Access views directly using the generated binding class
         popularCitySpinner2("India","Maharashtra");
         populateStateSpinner("India");
@@ -86,16 +86,16 @@ public class SignUpScreen extends AppCompatActivity {
                 finish();
             }
         });
-        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-
-            int textColor = Color.parseColor("#FDFDFD");
-            actionBar.setTitle("Sign Up");
-            actionBar.setLogo(R.drawable.logo);
-
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "Sign Up" + "</font>"));
-        }
+//        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//
+//            int textColor = Color.parseColor("#FDFDFD");
+//            actionBar.setTitle("Sign Up");
+//            actionBar.setLogo(R.drawable.logo);
+//
+//            actionBar.setDisplayShowTitleEnabled(true);
+//            actionBar.setTitle(Html.fromHtml("<font color='" + textColor + "'>" + "Sign Up" + "</font>"));
+//        }
 
 
     }

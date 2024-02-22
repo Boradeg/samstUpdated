@@ -7,11 +7,13 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,6 +56,7 @@ public class DashboardScreen extends AppCompatActivity {
     private Button latestButton;
     private Button upcomingButton;
     private Button liveButton;
+    private ProgressBar pBar;
 
 
     @SuppressLint({"NonConstantResourceId", "MissingInflatedId"})
@@ -64,6 +67,7 @@ public class DashboardScreen extends AppCompatActivity {
 
         // Find the DrawerLayout in the layout XML and assign it to the drawerLayout variable
         drawerLayout = findViewById(R.id.drawerLayout);
+        pBar = findViewById(R.id.pBar);
 
         allButton = findViewById(R.id.allButton);
         prevButton = findViewById(R.id.prevButton);
@@ -71,10 +75,17 @@ public class DashboardScreen extends AppCompatActivity {
         upcomingButton = findViewById(R.id.upcomingButton);
         liveButton = findViewById(R.id.liveButton);
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(DashboardScreen.this));
-        adapter = new EventAdapter(new ArrayList<>());
-        recyclerView.setAdapter(adapter);
-        fetchData();
+
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(DashboardScreen.this));
+                adapter = new EventAdapter(new ArrayList<>(),DashboardScreen.this);
+                recyclerView.setAdapter(adapter);
+                // Run function after 1 second delay
+                fetchData();
+
+
+
+
         allButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +151,7 @@ public class DashboardScreen extends AppCompatActivity {
 
 
     private void fetchData() {
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://sidhman.in/skmarati/new/admin/admin-api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -148,6 +160,7 @@ public class DashboardScreen extends AppCompatActivity {
         ApiService apiService = retrofit.create(ApiService.class);
 
         fetchEventData(apiService);
+
     }
 
     private void fetchEventData(ApiService apiService) {

@@ -1,9 +1,12 @@
 package com.example.samst.Dashboard;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +23,10 @@ import java.util.List;
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
 
     private List<EventResponse> events;
-
-    public EventAdapter(List<EventResponse> events) {
+    private Context context;
+    public EventAdapter(List<EventResponse> events, Context context) {
         this.events = events;
+        this.context=context;
     }
 
     public List<EventResponse> getEvents() {
@@ -48,6 +52,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.descriptionTextView.setText(event.getDescription());
         holder.eventLink.setText(event.getLink());
         holder.typeTextView.setText(event.getType());
+       // setAnimation(holder.itemView,position);
 
 
         // Load and display the image using Glide
@@ -55,7 +60,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 .load(buildImageUrl(event.getImage()))  // Use the getImage method
                 .into(holder.imageView);
     }
+     private void setAnimation(View viewToAnimate,int position){
+         Animation slide_in = AnimationUtils.loadAnimation(context,android.R.anim.slide_in_left);
+         viewToAnimate.startAnimation(slide_in);
 
+     }
     @Override
     public int getItemCount() {
         return events.size();
